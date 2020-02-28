@@ -12,6 +12,7 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "laravel/homestead": "^10.3"
     },
     "config": {
         "preferred-install": {
