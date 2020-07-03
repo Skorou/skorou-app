@@ -14,11 +14,11 @@ folders:
         to: /home/vagrant/phpmyadmin
 sites:
     -
-        map: mymedicalstartup.fr
+        map: mydigitalstartup.fr
         to: /home/vagrant/code/web/public
         type: symfony4
     -
-        map: mymedicalstartup.pma.fr
+        map: pma.mydigitalstartup.fr
         to: /home/vagrant/phpmyadmin
         port: 8000
 databases:
@@ -30,5 +30,5 @@ features:
         ohmyzsh: false
     -
         webdriver: false
-name: mymedicalstartup
-hostname: mymedicalstartup.fr
+name: mydigitalstartup
+hostname: mydigitalstartup.fr
