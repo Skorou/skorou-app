@@ -20,12 +20,7 @@ class FontUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $file_name;
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,7 +35,6 @@ class FontUser
 
     /**
      * @ORM\ManyToOne(targetEntity=Font::class, inversedBy="fontUsers")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $font;
 
@@ -49,26 +43,14 @@ class FontUser
         return $this->id;
     }
 
-    public function getPath(): ?string
+    public function getFile(): ?string
     {
-        return $this->path;
+        return $this->file;
     }
 
-    public function setPath(string $path): self
+    public function setFile(string $file): self
     {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    public function getFileName(): ?string
-    {
-        return $this->file_name;
-    }
-
-    public function setFileName(string $file_name): self
-    {
-        $this->file_name = $file_name;
+        $this->file = $file;
 
         return $this;
     }

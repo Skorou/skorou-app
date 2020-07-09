@@ -55,7 +55,7 @@ class Address
     private $last_name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="address")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="addresses")
      */
     private $user;
 

@@ -23,7 +23,7 @@ class Color
     private $hexa;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="color")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="colors")
      */
     private $user;
 

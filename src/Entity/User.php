@@ -52,32 +52,32 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Address::class, mappedBy="user")
      */
-    private $address;
+    private $addresses;
 
     /**
      * @ORM\OneToMany(targetEntity=CreditCard::class, mappedBy="user")
      */
-    private $credit_card;
+    private $credit_cards;
 
     /**
      * @ORM\OneToMany(targetEntity=FontUser::class, mappedBy="user")
      */
-    private $font_user;
+    private $font_users;
 
     /**
      * @ORM\OneToMany(targetEntity=Logo::class, mappedBy="user")
      */
-    private $logo;
+    private $logos;
 
     /**
      * @ORM\OneToMany(targetEntity=Color::class, mappedBy="user")
      */
-    private $color;
+    private $colors;
 
     /**
      * @ORM\OneToMany(targetEntity=ImageUploaded::class, mappedBy="user")
      */
-    private $image_uploaded;
+    private $images_uploaded;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="user")
@@ -91,12 +91,12 @@ class User
 
     public function __construct()
     {
-        $this->address = new ArrayCollection();
-        $this->credit_card = new ArrayCollection();
-        $this->font_user = new ArrayCollection();
-        $this->logo = new ArrayCollection();
-        $this->color = new ArrayCollection();
-        $this->image_uploaded = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
+        $this->credit_cards = new ArrayCollection();
+        $this->font_users = new ArrayCollection();
+        $this->logos = new ArrayCollection();
+        $this->colors = new ArrayCollection();
+        $this->images_uploaded = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
         $this->creations = new ArrayCollection();
     }
@@ -181,15 +181,15 @@ class User
     /**
      * @return Collection|Address[]
      */
-    public function getAddress(): Collection
+    public function getAddresses(): Collection
     {
-        return $this->address;
+        return $this->addresses;
     }
 
     public function addAddress(Address $address): self
     {
-        if (!$this->address->contains($address)) {
-            $this->address[] = $address;
+        if (!$this->addresses->contains($address)) {
+            $this->addresses[] = $address;
             $address->setUser($this);
         }
 
@@ -198,8 +198,8 @@ class User
 
     public function removeAddress(Address $address): self
     {
-        if ($this->address->contains($address)) {
-            $this->address->removeElement($address);
+        if ($this->addresses->contains($address)) {
+            $this->addresses->removeElement($address);
             // set the owning side to null (unless already changed)
             if ($address->getUser() === $this) {
                 $address->setUser(null);
@@ -212,15 +212,15 @@ class User
     /**
      * @return Collection|CreditCard[]
      */
-    public function getCreditCard(): Collection
+    public function getCreditCards(): Collection
     {
-        return $this->credit_card;
+        return $this->credit_cards;
     }
 
     public function addCreditCard(CreditCard $creditCard): self
     {
-        if (!$this->credit_card->contains($creditCard)) {
-            $this->credit_card[] = $creditCard;
+        if (!$this->credit_cards->contains($creditCard)) {
+            $this->credit_cards[] = $creditCard;
             $creditCard->setUser($this);
         }
 
@@ -229,8 +229,8 @@ class User
 
     public function removeCreditCard(CreditCard $creditCard): self
     {
-        if ($this->credit_card->contains($creditCard)) {
-            $this->credit_card->removeElement($creditCard);
+        if ($this->credit_cards->contains($creditCard)) {
+            $this->credit_cards->removeElement($creditCard);
             // set the owning side to null (unless already changed)
             if ($creditCard->getUser() === $this) {
                 $creditCard->setUser(null);
@@ -243,15 +243,15 @@ class User
     /**
      * @return Collection|FontUser[]
      */
-    public function getFontUser(): Collection
+    public function getFontUsers(): Collection
     {
-        return $this->font_user;
+        return $this->font_users;
     }
 
     public function addFontUser(FontUser $fontUser): self
     {
-        if (!$this->font_user->contains($fontUser)) {
-            $this->font_user[] = $fontUser;
+        if (!$this->font_users->contains($fontUser)) {
+            $this->font_users[] = $fontUser;
             $fontUser->setUser($this);
         }
 
@@ -260,8 +260,8 @@ class User
 
     public function removeFontUser(FontUser $fontUser): self
     {
-        if ($this->font_user->contains($fontUser)) {
-            $this->font_user->removeElement($fontUser);
+        if ($this->font_users->contains($fontUser)) {
+            $this->font_users->removeElement($fontUser);
             // set the owning side to null (unless already changed)
             if ($fontUser->getUser() === $this) {
                 $fontUser->setUser(null);
@@ -274,15 +274,15 @@ class User
     /**
      * @return Collection|Logo[]
      */
-    public function getLogo(): Collection
+    public function getLogos(): Collection
     {
-        return $this->logo;
+        return $this->logos;
     }
 
     public function addLogo(Logo $logo): self
     {
-        if (!$this->logo->contains($logo)) {
-            $this->logo[] = $logo;
+        if (!$this->logos->contains($logo)) {
+            $this->logos[] = $logo;
             $logo->setUser($this);
         }
 
@@ -291,8 +291,8 @@ class User
 
     public function removeLogo(Logo $logo): self
     {
-        if ($this->logo->contains($logo)) {
-            $this->logo->removeElement($logo);
+        if ($this->logos->contains($logo)) {
+            $this->logos->removeElement($logo);
             // set the owning side to null (unless already changed)
             if ($logo->getUser() === $this) {
                 $logo->setUser(null);
@@ -305,25 +305,25 @@ class User
     /**
      * @return Collection|Color[]
      */
-    public function getColor(): Collection
+    public function getColors(): Collection
     {
-        return $this->color;
+        return $this->colors;
     }
 
     public function addColor(Color $color): self
     {
-        if (!$this->color->contains($color)) {
-            $this->color[] = $color;
+        if (!$this->colors->contains($color)) {
+            $this->colors[] = $color;
             $color->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeColor(Color $color): self
+    public function removeColors(Color $color): self
     {
-        if ($this->color->contains($color)) {
-            $this->color->removeElement($color);
+        if ($this->colors->contains($color)) {
+            $this->colors->removeElement($color);
             // set the owning side to null (unless already changed)
             if ($color->getUser() === $this) {
                 $color->setUser(null);
@@ -336,15 +336,15 @@ class User
     /**
      * @return Collection|ImageUploaded[]
      */
-    public function getImageUploaded(): Collection
+    public function getImagesUploaded(): Collection
     {
-        return $this->image_uploaded;
+        return $this->images_uploaded;
     }
 
     public function addImageUploaded(ImageUploaded $imageUploaded): self
     {
-        if (!$this->image_uploaded->contains($imageUploaded)) {
-            $this->image_uploaded[] = $imageUploaded;
+        if (!$this->images_uploaded->contains($imageUploaded)) {
+            $this->images_uploaded[] = $imageUploaded;
             $imageUploaded->setUser($this);
         }
 
@@ -353,8 +353,8 @@ class User
 
     public function removeImageUploaded(ImageUploaded $imageUploaded): self
     {
-        if ($this->image_uploaded->contains($imageUploaded)) {
-            $this->image_uploaded->removeElement($imageUploaded);
+        if ($this->images_uploaded->contains($imageUploaded)) {
+            $this->images_uploaded->removeElement($imageUploaded);
             // set the owning side to null (unless already changed)
             if ($imageUploaded->getUser() === $this) {
                 $imageUploaded->setUser(null);

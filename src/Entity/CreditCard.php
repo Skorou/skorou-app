@@ -45,7 +45,7 @@ class CreditCard
     private $is_favorite;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="credit_card")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="credit_cards")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

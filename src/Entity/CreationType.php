@@ -40,7 +40,7 @@ class CreationType
     private $width;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Creation::class, mappedBy="creation_type")
+     * @ORM\OneToMany(targetEntity=Creation::class, mappedBy="creation_type")
      */
     private $creations;
 

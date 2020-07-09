@@ -29,9 +29,20 @@ class Folder
      */
     private $creations;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Folder::class, inversedBy="children")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Folder::class, mappedBy="parent")
+     */
+    private $children;
+
     public function __construct()
     {
         $this->creations = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +87,49 @@ class Folder
             // set the owning side to null (unless already changed)
             if ($creation->getFolder() === $this) {
                 $creation->setFolder(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getParent(): ?Folder
+    {
+        return $this->parent;
+    }
+
+    public function setParent(Folder $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Folder[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Folder $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Folder $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
             }
         }
 

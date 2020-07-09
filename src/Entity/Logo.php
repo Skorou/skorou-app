@@ -20,7 +20,7 @@ class Logo
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,7 +28,7 @@ class Logo
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="logo")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="logos")
      */
     private $user;
 
@@ -37,14 +37,14 @@ class Logo
         return $this->id;
     }
 
-    public function getPath(): ?string
+    public function getFile(): ?string
     {
-        return $this->path;
+        return $this->file;
     }
 
-    public function setPath(string $path): self
+    public function setFile(string $file): self
     {
-        $this->path = $path;
+        $this->file = $file;
 
         return $this;
     }

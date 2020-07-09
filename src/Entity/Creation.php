@@ -20,9 +20,14 @@ class Creation
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=256)
+     */
+    private $name;
+
+    /**
      * @ORM\Column(type="json")
      */
-    private $name = [];
+    private $data = [];
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="creations")
@@ -50,14 +55,26 @@ class Creation
         return $this->id;
     }
 
-    public function getName(): ?array
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(array $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    public function setData(array $data): self
+    {
+        $this->data = $data;
 
         return $this;
     }

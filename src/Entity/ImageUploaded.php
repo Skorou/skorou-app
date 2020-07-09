@@ -20,7 +20,7 @@ class ImageUploaded
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -28,7 +28,7 @@ class ImageUploaded
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="image_uploaded")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="images_uploaded")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -38,14 +38,14 @@ class ImageUploaded
         return $this->id;
     }
 
-    public function getPath(): ?string
+    public function getFile(): ?string
     {
-        return $this->path;
+        return $this->file;
     }
 
-    public function setPath(string $path): self
+    public function setFile(string $file): self
     {
-        $this->path = $path;
+        $this->file = $file;
 
         return $this;
     }
