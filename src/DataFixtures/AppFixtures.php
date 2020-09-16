@@ -22,7 +22,6 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
-require_once 'vendor/autoload.php';
 
 class AppFixtures extends Fixture
 {
@@ -58,7 +57,7 @@ class AppFixtures extends Fixture
             // create 20 colors
             $color = new Color();
             $color->setUser($user);
-            $color->setHexa(ltrim($faker->hexcolor, '#'));
+            $color->setHexa($faker->hexcolor);
             $manager->persist($color);
 
             // create 20 creations
