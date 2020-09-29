@@ -41,7 +41,7 @@ class Creation
     private $folder;
 
     /**
-     * @ORM\ManyToMany(targetEntity=CreationType::class, inversedBy="creations")
+     * @ORM\ManyToOne(targetEntity=CreationType::class, inversedBy="creations")
      */
     private $creation_type;
 
