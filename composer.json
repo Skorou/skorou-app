@@ -18,7 +18,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "laravel/homestead": "^10.3",
-        "symfony/maker-bundle": "^1.19"
+        "symfony/maker-bundle": "^1.21"
     },
     "config": {
         "preferred-install": {

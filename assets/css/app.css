@@ -1,3 +1,30 @@
-body {
+body
+{
     background-color: lightgray;
+    margin: 0;
+}
+
+/* navbar */
+
+.navbar
+{
+    background-color: white;
+    height: 100%;
+    padding: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.navbar-logo
+{
+    width: 150px;
+    height: auto;
+}
+
+/* titre */
+
+h1
+{
+    text-align: center;
 }
