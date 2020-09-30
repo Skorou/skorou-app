@@ -45,11 +45,6 @@ class Creation
      */
     private $creation_type;
 
-    public function __construct()
-    {
-        $this->creation_type = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -103,28 +98,14 @@ class Creation
         return $this;
     }
 
-    /**
-     * @return Collection|CreationType[]
-     */
-    public function getCreationType(): Collection
+    public function getCreationType(): CreationType
     {
         return $this->creation_type;
     }
 
-    public function addCreationType(CreationType $creationType): self
+    public function setCreationType(?CreationType $creationType): self
     {
-        if (!$this->creation_type->contains($creationType)) {
-            $this->creation_type[] = $creationType;
-        }
-
-        return $this;
-    }
-
-    public function removeCreationType(CreationType $creationType): self
-    {
-        if ($this->creation_type->contains($creationType)) {
-            $this->creation_type->removeElement($creationType);
-        }
+        $this->creation_type = $creationType;
 
         return $this;
     }
