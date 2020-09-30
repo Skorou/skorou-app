@@ -34,3 +34,8 @@ Credentials are user: 'homestead' and password: 'secret'
 Edit hosts file with administrator rights (usual at `C:\Windows\System32\drivers\etc\`)  
 Add the line `192.168.10.10 mymedicalstartup.fr` and save
 You may now access to the project at the address http://mymedicalstartup.fr/ (and http://mymedicalstartup.fr:8000/ for PhpMyAdmin)
+
+### Install JS dependencies
+Install [NodeJS & npm](https://nodejs.org/en/) (npm is automatically installed with node)  
+Run command command `npm install` to install all dependencies   
+To compile assets run `npm run dev` or (`npm run watch` for auto-compile on modification)

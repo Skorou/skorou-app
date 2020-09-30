@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% verbatim %}
+    <div id="vue-playground">
+        <h1>Un super compteur en Vue.JS !!!!</h1>
+        <button v-on:click="counter++">Ajouter 1</button>
+        <button v-on:click="counter--">Retirer 1</button>
+        <p>Le compteur vaut actuellement {{ counter }}.</p>
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+{% block title %}
+    Vue playground
+{% endblock %}
+
