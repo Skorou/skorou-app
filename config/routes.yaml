@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+backoffice:
+  path: /backoffice
+  controller: App\Controller\Backoffice\BackofficeController::index

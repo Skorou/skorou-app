@@ -36,9 +36,10 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setPassword($faker->password);
             $user->setAccountType($faker->randomDigit);
-            $user->setCompanyName($faker->company);
+            $user->setUsername($faker->company);
             $user->setCompanyPicture($faker->imageUrl);
             $user->setFreeCreations($faker->numberBetween(0, 20));
+            $user->setIsActive($faker->boolean);
             $manager->persist($user);
 
             // create 20 addresses
@@ -60,17 +61,10 @@ class AppFixtures extends Fixture
             $color->setHexa($faker->hexcolor);
             $manager->persist($color);
 
-            // create 20 creations
-            $creation = new Creation();
-            $creation->setUser($user);;
-            $creation->setName($faker->word);
-            $manager->persist($creation);
-
-            // create 20 creation categories
-            $creationCategory = new CreationCategory();
-            $creationCategory->setName($faker->word);
-            $creationCategory->setOrderIndex($i);
-            $manager->persist($creationCategory);
+            // create 20 folders
+            $folder = new Folder();
+            $folder->setName($faker->word);
+            $manager->persist($folder);
 
             // create 20 creation types
             $creationType = new CreationType();
@@ -79,6 +73,20 @@ class AppFixtures extends Fixture
             $creationType->setHeight($faker->numberBetween(200, 1500));
             $creationType->setWidth($faker->numberBetween(200, 1500));
             $manager->persist($creationType);
+
+            // create 20 creations
+            $creation = new Creation();
+            $creation->setUser($user);;
+            $creation->setName($faker->word);
+            $creation->setFolder($folder);
+            $creation->setCreationType($creationType);
+            $manager->persist($creation);
+
+            // create 20 creation categories
+            $creationCategory = new CreationCategory();
+            $creationCategory->setName($faker->word);
+            $creationCategory->setOrderIndex($i);
+            $manager->persist($creationCategory);
 
             // create 20 credit cards
             $creditCard = new CreditCard();
@@ -89,11 +97,6 @@ class AppFixtures extends Fixture
             $creditCard->setCvv($faker->numberBetween(100, 999));
             $creditCard->setIsFavorite($faker->boolean);
             $manager->persist($creditCard);
-
-            // create 20 folders
-            $folder = new Folder();
-            $folder->setName($faker->word);
-            $manager->persist($folder);
 
             // create 20 fonts
             $font = new Font();

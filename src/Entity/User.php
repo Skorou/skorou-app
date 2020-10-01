@@ -6,11 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -35,9 +36,9 @@ class User
     private $account_type;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, name="company_name")
      */
-    private $company_name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -89,6 +90,11 @@ class User
      */
     private $creations;
 
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -99,6 +105,7 @@ class User
         $this->images_uploaded = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
         $this->creations = new ArrayCollection();
+        $this->isActive = true;
     }
 
     public function getId(): ?int
@@ -142,14 +149,14 @@ class User
         return $this;
     }
 
-    public function getCompanyName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->company_name;
+        return $this->username;
     }
 
-    public function setCompanyName(string $company_name): self
+    public function setUsername(string $username): self
     {
-        $this->company_name = $company_name;
+        $this->username = $username;
 
         return $this;
     }
@@ -176,6 +183,22 @@ class User
         $this->free_creations = $free_creations;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 
     /**
@@ -424,5 +447,37 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
     }
 }
