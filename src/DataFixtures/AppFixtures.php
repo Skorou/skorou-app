@@ -34,7 +34,9 @@ class AppFixtures extends Fixture
         {
             $user = new User();
             $user->setEmail($faker->email);
-            $user->setPassword($faker->password);
+            $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+            $encodedPass = $encoder->encodePassword($faker->password, $user->getSalt());
+            $user->setPassword($encodedPass);
             $user->setAccountType($faker->randomDigit);
             $user->setUsername($faker->company);
             $user->setCompanyPicture($faker->imageUrl);
