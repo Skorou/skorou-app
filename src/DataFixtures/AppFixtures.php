@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
             $encodedPass = $encoder->encodePassword($faker->password, $user->getSalt());
             $user->setPassword($encodedPass);
-            $user->setAccountType($faker->randomDigit);
+            $user->setRoles(array('ROLE_USER'));
             $user->setUsername($faker->company);
             $user->setCompanyPicture($faker->imageUrl);
             $user->setFreeCreations($faker->numberBetween(0, 20));

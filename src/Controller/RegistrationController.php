@@ -6,12 +6,15 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
+use Exception;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -32,13 +35,14 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, \Swift_Mailer $mailer): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -49,7 +53,7 @@ class RegistrationController extends AbstractController
 
             $user->setIsActive(true);
             $user->setFreeCreations(3);
-            $user->setAccountType($user->userAccountType["user"]);
+            $user->setRoles(array('ROLE_USER'));
 
             //TODO: create condition when email sending is implemented
             $user->setIsVerified(true);
@@ -58,52 +62,40 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-//            $signatureComponents = $this->verifyEmailHelper->generateSignature(
-//                'registration_confirmation_route',
-//                $user->getId(),
-//                $user->getEmail()
-//            );
-//
-//            $email = new TemplatedEmail();
-//            $email->to($user->getEmail());
-//            $email->htmlTemplate('registration/confirmation_email.html.twig');
-//            $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
-//
-//            $this->mailer->send($email);
+            $signatureComponents = $this->verifyEmailHelper->generateSignature(
+                'app_verify_email',
+                $user->getId(),
+                $user->getEmail()
+            );
 
-            // handle the user registration form and persist the new user...
+            $email = (new TemplatedEmail())
+                ->from('glynn@example.com')
+                ->to($user->getEmail())
+                ->htmlTemplate('emails/signup.html.twig')
+                // pass variables (name => value) to the template
+                ->context([
+                    'expiration_date' => new \DateTime('+7 days'),
+                    'username' => $user->getUsername(),
+                    'signedUrl' => $signatureComponents->getSignedUrl()
+                ]);
 
-//            $signatureComponents = $this->verifyEmailHelper->generateSignature(
-//                'registration_confirmation_route',
-//                $user->getId(),
-//                $user->getEmail()
-//            );
 
-//            $email = new TemplatedEmail();
-//            $email->to($user->getEmail());
-//            $email->htmlTemplate('registration/confirmation_email.html.twig');
-//            $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
-
-//            $message = (new \Swift_Message())
-//                ->setSubject('Inscription à Manabi')
-//                ->setFrom('contact.manabi@gmail.com')
-//                ->setTo($user->getEmail())
-//                ->setBody(
-//                    $this->renderView(
-//                        'registration/confirmation_email.html.twig'
-//                    )
-//                )
-//            ;
-//
-//            $mailer->send($message);
-
-                return $guardHandler->authenticateUserAndHandleSuccess(
-                    $user,
-                    $request,
-                    $authenticator,
-                    'main' // firewall name in security.yaml
-                );
+            try
+            {
+                $mailer->send($email);
             }
+            catch (TransportExceptionInterface $e)
+            {
+                throw new Exception("Sending mail failed");
+            }
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
@@ -116,10 +108,11 @@ class RegistrationController extends AbstractController
     public function verifyUserEmail(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            $this->helper->handleEmailConfirmation($request, $this->getUser());
+            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 

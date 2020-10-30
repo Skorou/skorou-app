@@ -33,11 +33,6 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $account_type;
-
-    /**
      * @ORM\Column(type="string", length=50, name="company_name")
      */
     private $username;
@@ -102,12 +97,10 @@ class User implements UserInterface, \Serializable
      */
     private $isVerified = false;
 
-    public $userAccountType =
-        [
-            "admin"  => 1,
-            "editor" => 2,
-            "user"   => 3
-        ];
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -151,18 +144,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getAccountType(): ?int
-    {
-        return $this->account_type;
-    }
-
-    public function setAccountType(int $account_type): self
-    {
-        $this->account_type = $account_type;
-
-        return $this;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -197,14 +178,6 @@ class User implements UserInterface, \Serializable
         $this->free_creations = $free_creations;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->isActive;
     }
 
     /**
@@ -479,9 +452,35 @@ class User implements UserInterface, \Serializable
         // TODO: Implement unserialize() method.
     }
 
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_EDITOR';
+        $roles[] = 'ROLE_ADMIN';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
     }
 
     public function eraseCredentials()
@@ -506,4 +505,5 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
 }
