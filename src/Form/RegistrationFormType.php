@@ -47,13 +47,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('accountType', ChoiceType::class, [
-                'choices'  => [
-                    'Blip' => 1,
-                    'Blop' => 2,
-                    'Blup' => 3,
-                ],
-            ])
         ;
     }
 

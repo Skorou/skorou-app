@@ -102,6 +102,13 @@ class User implements UserInterface, \Serializable
      */
     private $isVerified = false;
 
+    public $userAccountType =
+        [
+            "admin"  => 1,
+            "editor" => 2,
+            "user"   => 3
+        ];
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
