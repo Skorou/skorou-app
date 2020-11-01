@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,11 +26,13 @@ class RegistrationController extends AbstractController
 {
     private $verifyEmailHelper;
     private $mailer;
+    private $entityManager;
 
-    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer)
+    public function __construct(VerifyEmailHelperInterface $helper, MailerInterface $mailer, EntityManagerInterface $manager)
     {
         $this->verifyEmailHelper = $helper;
         $this->mailer = $mailer;
+        $this->entityManager = $manager;
     }
 
     /**
@@ -55,12 +58,10 @@ class RegistrationController extends AbstractController
             $user->setFreeCreations(3);
             $user->setRoles(array('ROLE_USER'));
 
-            //TODO: create condition when email sending is implemented
-            $user->setIsVerified(true);
+//            $user->setIsVerified(false);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
             $signatureComponents = $this->verifyEmailHelper->generateSignature(
                 'app_verify_email',
@@ -69,7 +70,7 @@ class RegistrationController extends AbstractController
             );
 
             $email = (new TemplatedEmail())
-                ->from('glynn@example.com')
+                ->from('contact@skorou.com')
                 ->to($user->getEmail())
                 ->htmlTemplate('emails/signup.html.twig')
                 // pass variables (name => value) to the template
@@ -111,17 +112,40 @@ class RegistrationController extends AbstractController
         $user = $this->getUser();
 
         // validate email confirmation link, sets User::isVerified=true and persists
-        try {
+        try
+        {
             $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+            $user->setIsVerified(true);
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        }
+        catch (VerifyEmailExceptionInterface $exception)
+        {
+            $this->addFlash('error', $exception->getReason());
 
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_dashboard');
+        return $this->redirectToRoute('dashboard');
+    }
+
+    /**
+     * @Route("/wait_verify_email", name="wait_verify_email")
+     */
+    public function waitVerifyEmail()
+    {
+        $user = $this->getUser();
+
+        if($user->isVerified())
+        {
+            $this->addFlash('success', 'Your email address has been verified.');
+
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('registration/verify_email.html.twig');
     }
 }
