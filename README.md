@@ -39,6 +39,3 @@ You may now access to the project at the address http://mymedicalstartup.fr/ (an
 Install [NodeJS & npm](https://nodejs.org/en/) (npm is automatically installed with node)  
 Run command command `npm install` to install all dependencies   
 To compile assets run `npm run dev` or (`npm run watch` for auto-compile on modification)
-
-### Launch encore
-Run command `encore dev --watch` to be able to see style changes on frontend
