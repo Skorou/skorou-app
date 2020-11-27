@@ -15,14 +15,17 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             anonymous: true
             lazy: true
-            logout:
-                path: app_logout
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                target: app_login
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -33,7 +36,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backoffice, roles: ROLE_ADMIN }
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/wait_verify_email, roles: ROLE_USER}
+        - { path: ^/logout, roles: ROLE_USER }
+        - { path: ^/verify, roles: ROLE_USER }
+        - { path: ^/.*, allow_if: "user.isVerified() === true" }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER

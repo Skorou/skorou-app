@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -441,7 +442,15 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        // TODO: Implement serialize() method.
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->username,
+            $this->password
+            // see section on salt below
+            // $this->salt
+        ));
+
     }
 
     /**
@@ -449,7 +458,15 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        // TODO: Implement unserialize() method.
+        list (
+            $this->id,
+            $this->email,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+
     }
 
     /**
@@ -471,8 +488,6 @@ class User implements UserInterface, \Serializable
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        $roles[] = 'ROLE_EDITOR';
-        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }
@@ -505,5 +520,4 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-
 }
