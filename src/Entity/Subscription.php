@@ -44,7 +44,7 @@ class Subscription
 
     /**
      * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="subscriptions")
-     * @ORM\JoinColumn(nullable=false)
+     * TODO: add address when implemented nullable false
      */
     private $address;
 
@@ -56,9 +56,10 @@ class Subscription
 
     /**
      * @ORM\ManyToOne(targetEntity=CreditCard::class, inversedBy="subscriptions")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $credit_card;
+
+    public static $PAYMENT_TYPE = array("manual"=>0);
 
     public function getId(): ?int
     {

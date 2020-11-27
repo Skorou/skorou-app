@@ -181,6 +181,11 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getIsActive(): bool
+    {
+        return $this->isActive;
+    }
+
     /**
      * @param bool $isActive
      */
