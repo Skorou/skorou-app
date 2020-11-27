@@ -56,9 +56,6 @@ class RegistrationController extends AbstractController
 
             $user->setIsActive(true);
             $user->setFreeCreations(3);
-            $user->setRoles(array('ROLE_USER'));
-
-//            $user->setIsVerified(false);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
@@ -108,13 +105,13 @@ class RegistrationController extends AbstractController
      */
     public function verifyUserEmail(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try
         {
             $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+            $user->setRoles(array('ROLE_USER'));
             $user->setIsVerified(true);
 
             $this->entityManager->persist($user);

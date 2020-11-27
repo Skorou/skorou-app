@@ -488,8 +488,6 @@ class User implements UserInterface, \Serializable
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        $roles[] = 'ROLE_EDITOR';
-        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }
