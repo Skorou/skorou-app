@@ -4,8 +4,8 @@
         "core-js": "^3.0.0",
         "node-sass": "^4.14.1",
         "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^8.0.0",
         "vue": "^2.6.12",
+        "sass-loader": "^8.0.2",
         "vue-loader": "^15.9.3",
         "vue-template-compiler": "^2.6.12",
         "webpack-notifier": "^1.6.0"
