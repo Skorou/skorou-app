@@ -25,6 +25,12 @@
                 fontFamily: 'Comic sans MS',
                 draggable: true,
             })">Text</button>
+            <br/>
+            <button @click="loadImage({
+                height: 150,
+                width: 150,
+                draggable: true,
+            })">Image</button>
         </div>
     </div>
 </template>
@@ -44,6 +50,16 @@
         methods: {
             addElem: function(type, config){
                 this.$refs.canvas.addElement(type, config)
+            },
+            loadImage: function (config) {
+                let image = new Image();
+                image.onload = function(){
+                    this.addElem('image', {
+                        ...config,
+                        image
+                    });
+                }.bind(this);
+                image.src = "/assets/images/logo_skorou.jpg";
             }
         }
     }
