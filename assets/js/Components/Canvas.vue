@@ -4,6 +4,7 @@
             <template v-for="element in elements">
                 <v-rect v-if="element.type === 'rect'" :config="element.config"></v-rect>
                 <v-circle v-else-if="element.type === 'circle'" :config="element.config"></v-circle>
+                <v-text v-else-if="element.type === 'text'" :config="element.config"></v-text>
             </template>
         </v-layer>
     </v-stage>

@@ -17,6 +17,14 @@
                 strokeWidth: 5,
                 draggable: true
             })">Cercle</button>
+            <br/>
+            <input v-model="textInput" placeholder="Enter text here"/>
+            <button @click="textInput && addElem('text', {
+                text: textInput,
+                fontSize: 30,
+                fontFamily: 'Comic sans MS',
+                draggable: true,
+            })">Text</button>
         </div>
     </div>
 </template>
@@ -30,6 +38,7 @@
         data() {
             return {
                 elements: [],
+                textInput: '',
             }
         },
         methods: {
