@@ -14,6 +14,7 @@ class ContactController extends AbstractController
     {
         return $this->render('frontoffice/contact/contact.html.twig', [
             'controller_name' => 'ContactController',
+            'title' => 'Contact'
         ]);
     }
 }

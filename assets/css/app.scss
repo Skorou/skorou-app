@@ -1,3 +1,9 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
 body
 {
     background-color: lightgray;
@@ -6,25 +12,37 @@ body
 
 /* navbar */
 
-.navbar
+.menu-button, .menu-button:focus
 {
-    background-color: white;
-    height: 100%;
-    padding: 50px;
-    position: absolute;
-    top: 0;
-    left: 0;
+    background-color: transparent;
+    border: none;
 }
 
+//.navbar
+//{
+//    background-color: white;
+//    height: 100%;
+//    padding: 50px;
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//}
+//
 .navbar-logo
 {
     width: 150px;
     height: auto;
 }
 
-/* titre */
+/* title */
 
-h1
+h1, h2
 {
     text-align: center;
+}
+
+/* alerts */
+.alert
+{
+    z-index: 10;
 }
