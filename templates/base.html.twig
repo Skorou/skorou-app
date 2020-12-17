@@ -2,26 +2,30 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{{ title | default('Skorou') }}{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
+        <div>
+            {% block navigation %}{% endblock %}
 
-            <div class="alert alert-{{ label }}" role="alert">
-                {{ message }}
-            </div>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
 
-        {% endfor %}
-    {% endfor %}
+                    <div class="alert alert-{{ label }}" role="alert">
+                        {{ message }}
+                    </div>
 
-        {% block body %}{% endblock %}
+                {% endfor %}
+            {% endfor %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+            {% block body %}{% endblock %}
+
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock %}
+        </div>
     </body>
 </html>
