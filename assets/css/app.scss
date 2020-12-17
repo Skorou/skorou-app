@@ -1,8 +1,14 @@
 @import '~bootstrap/scss/bootstrap.scss';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+/* app colors */
+
+/* icons */
+
+i.bi
+{
+    font-size: 2rem;
+}
 
 body
 {
@@ -12,22 +18,27 @@ body
 
 /* navbar */
 
-.menu-button, .menu-button:focus
+.menu-button
 {
     background-color: transparent;
     border: none;
+    color: black;
 }
 
-//.navbar
-//{
-//    background-color: white;
-//    height: 100%;
-//    padding: 50px;
-//    position: absolute;
-//    top: 0;
-//    left: 0;
-//}
-//
+.side-navbar
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    padding: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: all ease-out .3s;
+}
+
 .navbar-logo
 {
     width: 150px;
