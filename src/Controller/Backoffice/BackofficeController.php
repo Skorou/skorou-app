@@ -55,13 +55,19 @@ class BackofficeController extends AbstractDashboardController
 
     public function configureAssets(): Assets
     {
-        return Assets::new()->addCssFile('css/backoffice.css');
+        $assets = Assets::new();
+
+        return $assets
+            ->addCssFile('css/backoffice.css')
+            ->addCssFile('bundles/easyadmin/app.css')
+            ;
     }
 
     public function configureMenuItems(): iterable
     {
         return [
             MenuItem::linkToDashboard('Backoffice', 'fa fa-home'),
+            MenuItem::linktoRoute('Frontoffice', 'fa fa-home', 'dashboard'),
 
             MenuItem::section('Templates'),
             MenuItem::linkToCrud('Créations', 'fa fa-tags', Creation::class),
