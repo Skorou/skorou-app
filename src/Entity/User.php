@@ -520,4 +520,13 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
 }
