@@ -41,11 +41,6 @@ class Template
     private $creation_type;
 
     /**
-     * @ORM\ManyToMany(targetEntity=CreationCategory::class, inversedBy="templates")
-     */
-    private $creation_category;
-
-    /**
      * @ORM\OneToMany(targetEntity=TemplateFormField::class, mappedBy="template")
      */
     private $template_form_field;
@@ -105,32 +100,6 @@ class Template
     public function setCreationType(?CreationType $creation_type): self
     {
         $this->creation_type = $creation_type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|CreationCategory[]
-     */
-    public function getCreationCategory(): Collection
-    {
-        return $this->creation_category;
-    }
-
-    public function addCreationCategory(CreationCategory $creationCategory): self
-    {
-        if (!$this->creation_category->contains($creationCategory)) {
-            $this->creation_category[] = $creationCategory;
-        }
-
-        return $this;
-    }
-
-    public function removeCreationCategory(CreationCategory $creationCategory): self
-    {
-        if ($this->creation_category->contains($creationCategory)) {
-            $this->creation_category->removeElement($creationCategory);
-        }
 
         return $this;
     }
