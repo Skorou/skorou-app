@@ -42,7 +42,7 @@ security:
         - { path: ^/wait_verify_email, roles: ROLE_USER}
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/verify, roles: ROLE_USER }
-        - { path: ^/.*, allow_if: "user.isVerified() === true" }
+        - { path: ^/.*, allow_if: "user.isVerified() === true and is_authenticated()" }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
