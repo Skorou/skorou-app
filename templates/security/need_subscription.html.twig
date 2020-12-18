@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <p>Si vous souhaitez utiliser l'application Skorou, merci de bien vouloir vous abonner ou renouveler votre abonnement.</p>
+
+    <button>Renouveler mon abonnement</button>
+
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+
+{% endblock %}

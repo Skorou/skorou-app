@@ -18,7 +18,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser())
+        $user = $this->getUser();
+
+         if ($user)
          {
              return $this->redirectToRoute('dashboard');
          }
@@ -37,5 +39,15 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route("/need_subscription", name="need_subscription")
+     */
+    public function needSubscription()
+    {
+        return $this->render('security/need_subscription.html.twig', [
+            'title' => 'Renouveler votre abonnement',
+        ]);
     }
 }
