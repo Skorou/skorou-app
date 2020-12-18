@@ -1,0 +1,78 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+/* app colors */
+
+$primary-color-1: yellow;
+$primary-color-2: green;
+$primary-color-3: blue;
+$text-color: #121212;
+
+/* titles and text */
+h1
+{
+  color: $primary-color-1;
+}
+
+h2
+{
+  color: $primary-color-2;
+}
+
+.content-text
+{
+  color: $text-color;
+}
+
+.center-text
+{
+    text-align: center;
+}
+
+/* icons */
+
+i.bi
+{
+    font-size: 2rem;
+}
+
+body
+{
+    background-color: lightgray;
+    margin: 0;
+}
+
+/* navbar */
+
+.menu-button
+{
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+.side-navbar
+{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    padding: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: all ease-out .3s;
+}
+
+.navbar-logo
+{
+    width: 150px;
+    height: auto;
+}
+
+/* alerts */
+.alert
+{
+    z-index: 10;
+}

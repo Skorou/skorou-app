@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    {%  block navigation %}
+        <button class="menu-button">
+            <i class="bi bi-list"></i>
+        </button>
+        <nav class="side-navbar">
+            <button class="menu-button close">
+                <i class="bi bi-x"></i>
+            </button>
+
+            <img src="{{ asset('assets/images/logo_skorou.jpg') }}" alt="logo Skorou" class="navbar-logo"/>
+            <ul>
+                <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
+                <li><a href="{{ path('contact') }}">Contact</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('backoffice') }}">Backoffice</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+            </ul>
+        </nav>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="{{ asset('assets/js/animations.js') }}" type="text/javascript"></script>
+    {% endblock %}
+{% endblock %}

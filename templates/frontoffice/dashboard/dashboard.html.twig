@@ -1,12 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'frontoffice/frontoffice_base.html.twig' %}
 
 {% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
-    {{ include('frontoffice/default/navigation.html.twig') }}
 
-    <div>
-        <h1>Tableau de bord</h1>
-        <h2>Bonjour {{ user.username }}</h2>
-    </div>
+    {% block content %}
+        <div class="center-text">
+            <h1>Tableau de bord</h1>
+            <h2>Bonjour {{ user.username }}</h2>
+        </div>
+    {% endblock %}
+
 {% endblock %}
