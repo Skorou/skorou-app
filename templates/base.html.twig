@@ -9,8 +9,6 @@
     </head>
     <body>
         <div>
-            {% block navigation %}{% endblock %}
-
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
 
@@ -20,6 +18,8 @@
 
                 {% endfor %}
             {% endfor %}
+
+            {% block navigation %}{% endblock %}
 
             {% block body %}{% endblock %}
 

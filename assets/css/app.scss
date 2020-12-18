@@ -3,6 +3,32 @@
 
 /* app colors */
 
+$primary-color-1: yellow;
+$primary-color-2: green;
+$primary-color-3: blue;
+$text-color: #121212;
+
+/* titles and text */
+h1
+{
+  color: $primary-color-1;
+}
+
+h2
+{
+  color: $primary-color-2;
+}
+
+.content-text
+{
+  color: $text-color;
+}
+
+.center-text
+{
+    text-align: center;
+}
+
 /* icons */
 
 i.bi
@@ -43,13 +69,6 @@ body
 {
     width: 150px;
     height: auto;
-}
-
-/* title */
-
-h1, h2
-{
-    text-align: center;
 }
 
 /* alerts */
