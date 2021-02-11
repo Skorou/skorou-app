@@ -166,4 +166,9 @@ class CreationType
 
         return $this;
     }
+
+    public function getDimensionsLabel() : string
+    {
+        return "{$this->getWidth()} x {$this->getHeight()}";
+    }
 }

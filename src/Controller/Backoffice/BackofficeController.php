@@ -3,12 +3,12 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Creation;
+use App\Entity\CreationType;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,7 +70,8 @@ class BackofficeController extends AbstractDashboardController
             MenuItem::linktoRoute('Frontoffice', 'fa fa-home', 'dashboard'),
 
             MenuItem::section('Templates'),
-            MenuItem::linkToCrud('Créations', 'fa fa-tags', Creation::class),
+            MenuItem::linkToCrud('Types de catégorie', 'fa fa-tags', CreationType::class),
+            MenuItem::linkToCrud('Créations', 'fa fa-file', Creation::class),
 
             MenuItem::section('Users'),
             MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class)

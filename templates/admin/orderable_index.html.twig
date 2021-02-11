@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends '@EasyAdmin/crud/index.html.twig' %}
+
+{% block content_header %}
+    {{ parent() }}
+    <div id="order-toast" class="toast" style="position: fixed; bottom: 50px; right: 50px;" data-delay="10000">
+        <div class="toast-header">
+            <button type="button" class="mb-1 ml-auto close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            IMPLEMENT TOAST
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+
+    {% set order_url = ea_url()
+        .setController('App\\Controller\\Backoffice\\CreationTypeController')
+        .setAction('order') %}
+    <div id="backend-order-url-holder" data-url="{{ order_url }}"></div>
+    {{ encore_entry_script_tags('admin-orderable-index') }}
+
+{% endblock %}
+
