@@ -22,7 +22,7 @@ class CreationTypeController extends OrderableController
     {
         return parent::configureCrud($crud)
             ->setEntityLabelInSingular("Type de création")
-            ->setEntityLabelInSingular("Types de création")
+            ->setEntityLabelInPlural("Types de création")
             ->setSearchFields(['name']);
     }
 

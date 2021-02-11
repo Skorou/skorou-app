@@ -32,11 +32,15 @@ Sortable.create(tableBody, {
         }).then(function(response){
             if(response.ok) {
                 $('#order-toast .toast-body').text('Ordre enregistré');
+                $('#order-toast').toast('show');
             } else {
                 $('#order-toast .toast-body').text("Erreur lors de la sauvegarde de l'ordre");
+                $('#order-toast').toast('show');
+
             }
         }).catch(function(error){
-            
+            $('#order-toast .toast-body').text(error);
+            $('#order-toast').toast('show');
         });
     }
 });
