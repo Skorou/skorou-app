@@ -33,7 +33,6 @@ class CreationTypeController extends OrderableController
             TextField::new("dimensionsLabel", "Dimensions")->onlyOnIndex(),
             IntegerField::new("width", "Largeur")->onlyOnForms(),
             IntegerField::new("height", "Hauteur")->onlyOnForms(),
-            IntegerField::new("order_index", "Index")->onlyOnForms(),
         ];
     }
 }
