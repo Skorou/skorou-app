@@ -28,7 +28,7 @@ class FontUser
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="font_user")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="font_users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
