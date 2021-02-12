@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Address;
 use App\Entity\Color;
 use App\Entity\Creation;
-use App\Entity\CreationCategory;
 use App\Entity\CreationType;
 use App\Entity\CreditCard;
 use App\Entity\Folder;
@@ -83,12 +82,6 @@ class AppFixtures extends Fixture
             $creation->setFolder($folder);
             $creation->setCreationType($creationType);
             $manager->persist($creation);
-
-            // create 20 creation categories
-            $creationCategory = new CreationCategory();
-            $creationCategory->setName($faker->word);
-            $creationCategory->setOrderIndex($i);
-            $manager->persist($creationCategory);
 
             // create 20 credit cards
             $creditCard = new CreditCard();
