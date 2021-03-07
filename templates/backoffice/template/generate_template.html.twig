@@ -1,0 +1,16 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block page_title %}Éditer un template{% endblock %}
+
+{% block content_title %}Éditer le template {{ obj.name }}{% endblock %}
+
+{% block content %}
+    {% verbatim %}
+    <div id="template-editor">
+      <Editor/>
+    </div>
+    {% endverbatim %}
+    {{ encore_entry_script_tags('template-editor') }}
+
+{% endblock %}
+
