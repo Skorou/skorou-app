@@ -3,9 +3,10 @@
 
 /* app colors */
 
-$primary-color-1: yellow;
-$primary-color-2: green;
-$primary-color-3: blue;
+$primary-color-1: #FE9B2B;
+$primary-color-2: #FE524D;
+$primary-color-3: #011E50;
+$primary-color-4: #ffff;
 $text-color: #121212;
 
 /* titles and text */
@@ -21,7 +22,7 @@ h2
 
 .content-text
 {
-  color: $text-color;
+  color: $primary-color-4;
 }
 
 .center-text
@@ -38,7 +39,7 @@ i.bi
 
 body
 {
-    background-color: lightgray;
+    background-color: $primary-color-3;
     margin: 0;
 }
 
@@ -75,4 +76,64 @@ body
 .alert
 {
     z-index: 10;
+}
+
+/* graphics */
+.registration-container
+{
+    height: 70vh;
+    width: 70%;
+    position: relative;
+    margin: 15vh auto;
+
+    .registration-block
+    {
+        background-color: #fefefe;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+        border-radius: 50px;
+        box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+    }
+
+    .sun-graphics
+    {
+        width: 300px;
+        height: auto;
+        position: absolute;
+        z-index: 10;
+        top: -100px;
+        right: -100px;
+    }
+
+    .dimamond-graphics
+    {
+        width: 300px;
+        height: auto;
+        position: absolute;
+        z-index: -10;
+        top: -100px;
+        right: 300px;
+    }
+
+    .dimamond-graphics-bottom
+    {
+        width: 300px;
+        height: auto;
+        position: absolute;
+        z-index: -10;
+        bottom: -150px;
+        right: 50px;
+    }
+
+    .sun-graphics-bottom
+    {
+        width: 300px;
+        height: auto;
+        position: absolute;
+        z-index: 10;
+        bottom: -100px;
+        left: -100px;
+        transform: rotate(180deg);
+    }
 }

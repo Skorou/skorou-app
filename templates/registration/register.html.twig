@@ -4,8 +4,12 @@
 
 {% block body %}
 
-    <h1>S'inscrire</h1>
+    {% verbatim %}
+    <div id="registration">
+        <Registration/>
+    </div>
+    {% endverbatim %}
 
-    {{ form(registrationForm) }}
+{#    {{ form(registrationForm) }}#}
 
 {% endblock %}

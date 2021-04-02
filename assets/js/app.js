@@ -16,10 +16,23 @@ import Vue from 'vue';
 import VueKonva from 'vue-konva';
 
 import Editor from "./Components/Editor";
+import Registration from "./Components/registration/Registration";
+import RegistrationContent from "./Components/registration/RegistrationContent";
 
 Vue.use(VueKonva);
 
 new Vue({
     el: '#vue-playground',
     components: { Editor }
+});
+
+// registration
+new Vue({
+    el: '#registration',
+    components: { Registration }
+});
+
+new Vue({
+    el: '#registration-content',
+    components: { RegistrationContent }
 });
