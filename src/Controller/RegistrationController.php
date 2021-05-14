@@ -150,4 +150,139 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/verify_email.html.twig');
     }
+
+    /**
+     * @Route("/register/welcome", name="welcome_user")
+     */
+    public function welcomeUser()
+    {
+        $user = $this->getUser();
+
+        return $this->render('registration/welcome.html.twig', [
+            'controller_name' => 'RegistrationController',
+            'user' => $user,
+            'title' => 'Welcome'
+        ]);
+    }
+
+    /**
+     * @Route("/register/subscribe", name="subscriptions")
+     */
+    public function subscriptions($subscriptions)
+    {
+        return $this->render('registration/subscription.html.twig', [
+            'controller_name' => 'RegistrationController',
+            'subscriptions' => $subscriptions,
+            'title' => 'Choix de l\'abonnement'
+        ]);
+    }
+
+    /**
+     * @Route("/register/subscription_payment", name="subscriptionPayment")
+     */
+    public function subscriptionPayment(Request $request)
+    {
+        // Set your secret key. Remember to switch to your live secret key in production.
+        // See your keys here: https://dashboard.stripe.com/apikeys
+        \Stripe\Stripe::setApiKey('sk_test_51IjOenKmSLmNLJ03EWVJGLjidQzNbNUQuCBcxSnoA8GHtU8NoNlpzAjrjC2ZrFc21vOYe4BWrrdPUycLSWdRTXx700NhERDdnv');
+
+        // Token is created using Stripe Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+//        $token = $_POST['stripeToken'];
+
+        if ($request->isMethod('post'))
+        {
+            try
+            {
+                $charge = \Stripe\Charge::create([
+                    'amount' => 999,
+                    'currency' => 'eur',
+                    'description' => 'Example charge',
+                    'source' => $request->request->get('stripeToken'),
+                ]);
+
+                $subscription = new Subscription();
+                $user = $this->getUser();
+
+                //TODO: set user address in subscription
+//                $subscription->setAddress();
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+            }
+            catch(\Stripe\Exception\CardException $e)
+            {
+                // Since it's a decline, \Stripe\Exception\CardException will be caught
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (\Stripe\Exception\RateLimitException $e)
+            {
+                // Too many requests made to the API too quickly
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (\Stripe\Exception\InvalidRequestException $e)
+            {
+                // Invalid parameters were supplied to Stripe's API
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (\Stripe\Exception\AuthenticationException $e)
+            {
+                // Authentication with Stripe's API failed
+                // (maybe you changed API keys recently)
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (\Stripe\Exception\ApiConnectionException $e)
+            {
+                // Network communication with Stripe failed
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (\Stripe\Exception\ApiErrorException $e)
+            {
+                // Display a very generic error to the user, and maybe send
+                // yourself an email
+                echo 'Status is:' . $e->getHttpStatus() . '\n';
+                echo 'Type is:' . $e->getError()->type . '\n';
+                echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                echo 'Param is:' . $e->getError()->param . '\n';
+                echo 'Message is:' . $e->getError()->message . '\n';
+            }
+            catch (Exception $e)
+            {
+                // Something else happened, completely unrelated to Stripe
+                echo $e;
+            }
+
+        }
+
+        return $this->render('registration/subscription_payment.html.twig', [
+            'controller_name' => 'RegistrationController',
+            'title' => 'Choix de l\'abonnement'
+        ]);
+    }
 }

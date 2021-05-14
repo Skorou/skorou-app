@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <h1>Choix de l'abonnement</h1>
+
+    <div class="subscription-container">
+        {% for subscription in subscriptions %}
+
+            {% set regularPrice = subscription.regularPrice|trim %}
+            {% set salePrice = subscription.salePrice|trim %}
+            {% set saleAmount = regularPrice - salePrice %}
+
+            <div class="subscription-block">
+                <p>{{ subscription.length }} mois</p>
+                <p>{{ salePrice }} €</p>
+                <p>Au lieu de <span class="subscription-regular-price">{{ regularPrice }} €</span></p>
+                {% if saleAmount > 0 %}
+                    <p>-{{ saleAmount }} € </p>
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}
