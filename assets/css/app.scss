@@ -3,31 +3,10 @@
 
 /* app colors */
 
-$primary-color-1: rgba(138, 182, 237, 1);
-$primary-color-1-transparent: rgba(138, 182, 237, 0.7);
-$primary-color-2: rgba(232, 37, 208, 1);
-$primary-color-2-transparent: rgba(232, 37, 208, 0.7);
-$primary-color-3: rgba(98, 46, 219, 1);
-$primary-color-3-transparent: rgba(98, 46, 219, 0.7);
+$primary-color-1: yellow;
+$primary-color-2: green;
+$primary-color-3: blue;
 $text-color: #121212;
-
-/* global */
-a.full-width-button
-{
-    display: block;
-    width: 100%;
-    border-radius: 50px;
-    color: white;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease 0s;
-}
-
-a.full-width-button:hover
-{
-    text-decoration: none;
-}
 
 /* titles and text */
 h1
@@ -96,67 +75,4 @@ body
 .alert
 {
     z-index: 10;
-}
-
-/* Welcome Page */
-.login-register-container
-{
-    width: 600px;
-    height: auto;
-    padding: 100px;
-    background-color: white;
-    border-radius: 79px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.login-register-container > .sign-up-button
-{
-    background-color: $primary-color-2;
-    margin-bottom: 30px;
-}
-
-.login-register-container > .sign-up-button:hover
-{
-    background-color: $primary-color-2-transparent;
-}
-
-.login-register-container > .sign-in-button
-{
-    background-color: $primary-color-3;
-}
-
-.login-register-container > .sign-in-button:hover
-{
-    background-color: $primary-color-3-transparent;
-}
-
-/* Subcription */
-.subscription-container
-{
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-}
-
-.subscription-block
-{
-    width: 20%;
-    height: auto;
-    padding: 100px;
-    background-color: white;
-    border-radius: 79px;
-}
-
-.subscription-regular-price
-{
-    text-decoration: line-through;
-}
-
-/* Subscription payment */
-#card-element > .__PrivateStripeElement > .__PrivateStripeElement-input
-{
-    position: relative !important;
 }

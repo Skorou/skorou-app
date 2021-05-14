@@ -19,7 +19,7 @@ Symfony app is now available at http://192.168.10.10
 (Please note that you need to start vagrant each time, possible in PHPStorm (Tools > Vagrant > Run))
 
 ### Env file
-Copy .env file into .env.localnpm 
+Copy .env file into .env.local
 Create a database using PhpMyAdmin or ssh
 set `DATABASE_URL` with your database configuration (with Homestead set it to `DATABASE_URL=mysql://homestead:secret@127.0.0.1:3306/mydatabase)` 
  
