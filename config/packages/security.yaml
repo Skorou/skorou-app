@@ -36,12 +36,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/index, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backoffice, roles: ROLE_ADMIN }
+        - { path: ^/wait_verify_email, roles: ROLE_USER}
         - { path: ^/logout, roles: ROLE_USER }
-        - { path: ^/register/.*, roles: ROLE_USER }
+        - { path: ^/verify, roles: ROLE_USER }
         - { path: ^/need_subscription, roles: ROLE_USER }
         - { path: ^/.*, allow_if: "user.isVerified() === true and user.isActive() === true and is_authenticated()" }
 
