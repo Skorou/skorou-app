@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -16,6 +17,11 @@ class DashboardController extends AbstractController
     public function index()
     {
         $user = $this->getUser();
+
+        if(!$user->isActive())
+        {
+            return $this->redirectToRoute('need_subscription');
+        }
 
         return $this->render('frontoffice/dashboard/dashboard.html.twig', [
             'controller_name' => 'DashboardController',

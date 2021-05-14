@@ -50,4 +50,17 @@ class SecurityController extends AbstractController
             'title' => 'Renouveler votre abonnement',
         ]);
     }
+
+    /**
+     * @Route("/index", name="index")
+     */
+    public function welcomePage()
+    {
+        if($this->getUser())
+        {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('security/index.html.twig');
+    }
 }
