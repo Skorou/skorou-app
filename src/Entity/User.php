@@ -113,7 +113,7 @@ class User implements UserInterface, \Serializable
         $this->images_uploaded = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
         $this->creations = new ArrayCollection();
-        $this->isActive = true;
+        $this->isActive = false;
     }
 
     public function getId(): ?int

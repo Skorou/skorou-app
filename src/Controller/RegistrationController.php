@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Subscription;
 use App\Entity\User;
+use App\Form\AddressFormType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
@@ -59,7 +61,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setIsActive(true);
+            $user->setIsActive(false);
             $user->setFreeCreations(3);
 
             $this->entityManager->persist($user);
@@ -106,7 +108,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/register/verify/email", name="app_verify_email")
      */
     public function verifyUserEmail(Request $request): Response
     {
@@ -131,11 +133,11 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('welcome_user');
     }
 
     /**
-     * @Route("/wait_verify_email", name="wait_verify_email")
+     * @Route("/register/wait_verify_email", name="wait_verify_email")
      */
     public function waitVerifyEmail()
     {
@@ -145,7 +147,7 @@ class RegistrationController extends AbstractController
         {
             $this->addFlash('success', 'Your email address has been verified.');
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('welcome_user');
         }
 
         return $this->render('registration/verify_email.html.twig');
@@ -166,10 +168,78 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register/subscribe", name="subscriptions")
+     * @Route("/register/address", name="address")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function subscriptions($subscriptions)
+    public function address(Request $request)
     {
+////        $user = $this->getUser();
+//        //TODO: what ? une adresse est forcément liée à une souscription ??
+//        $address = new Address($subscriptions);
+//
+//        $form = $this->createForm(AddressFormType::class, $address);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid())
+//        {
+////            $user->setIsActive(false);
+////            $user->setFreeCreations(3);
+////
+////            $this->entityManager->persist($user);
+////            $this->entityManager->flush();
+//
+//            return $this->redirectToRoute('subscriptions');
+//        }
+//
+//        return $this->render('registration/address.html.twig', [
+//            'addressForm' => $form->createView(),
+//            'controller_name' => 'RegistrationController',
+//        ]);
+    }
+
+    public function getSubscriptions()
+    {
+        //TODO: manage to get this subscriptions array directly with class attribute
+        $subscriptions = [
+            [
+                'id'           => 1,
+                'length'       => 1,
+                'regularPrice' => 20,
+                'salePrice'    => 20
+            ],
+            [
+                'id'           => 2,
+                'length'       => 3,
+                'regularPrice' => 60,
+                'salePrice'    => 55
+            ],
+            [
+                'id'           => 3,
+                'length'       => 6,
+                'regularPrice' => 120,
+                'salePrice'    => 105
+            ],
+            [
+                'id'           => 4,
+                'length'       => 12,
+                'regularPrice' => 240,
+                'salePrice'    => 200
+            ],
+        ];
+
+        return $subscriptions;
+    }
+
+    /**
+     * @Route("/register/subscribe", name="subscriptions", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function subscriptions(Request $request)
+    {
+        $subscriptions = $this->getSubscriptions();
+
         return $this->render('registration/subscription.html.twig', [
             'controller_name' => 'RegistrationController',
             'subscriptions' => $subscriptions,
@@ -178,7 +248,9 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register/subscription_payment", name="subscriptionPayment")
+     * @Route("/register/subscription_payment", name="subscription_payment", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function subscriptionPayment(Request $request)
     {
@@ -190,25 +262,27 @@ class RegistrationController extends AbstractController
         // Get the payment token ID submitted by the form:
 //        $token = $_POST['stripeToken'];
 
+        $subscriptionAmount = $request->get('subscriptionAmount');
+
         if ($request->isMethod('post'))
         {
             try
             {
                 $charge = \Stripe\Charge::create([
-                    'amount' => 999,
+                    'amount' => $subscriptionAmount * 100,
                     'currency' => 'eur',
                     'description' => 'Example charge',
                     'source' => $request->request->get('stripeToken'),
                 ]);
 
-                $subscription = new Subscription();
-                $user = $this->getUser();
-
-                //TODO: set user address in subscription
-//                $subscription->setAddress();
-
-                $this->entityManager->persist($user);
-                $this->entityManager->flush();
+//                $subscription = new Subscription();
+//                $user = $this->getUser();
+//
+//                //TODO: set user address in subscription
+////                $subscription->setAddress();
+//
+//                $this->entityManager->persist($user);
+//                $this->entityManager->flush();
             }
             catch(\Stripe\Exception\CardException $e)
             {
@@ -282,7 +356,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/subscription_payment.html.twig', [
             'controller_name' => 'RegistrationController',
-            'title' => 'Choix de l\'abonnement'
+            'title' => 'Paiement'
         ]);
     }
 }

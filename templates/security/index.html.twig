@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block body %}
+
+    <div class="login-register-container">
+        <h1>Bienvenue sur Skorou !</h1>
+        <a href="{{ path('app_register') }}" class="full-width-button sign-up-button">S'inscrire</a>
+        <a href="{{ path('app_login') }}" class="full-width-button sign-in-button">Se connecter</a>
+    </div>
+{% endblock %}
