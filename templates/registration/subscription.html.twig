@@ -13,13 +13,24 @@
             {% set salePrice = subscription.salePrice|trim %}
             {% set saleAmount = regularPrice - salePrice %}
 
+            {% if saleAmount > 0 %}
+                {% set price = salePrice %}
+            {% else %}
+                {% set price = regularPrice %}
+            {% endif %}
+
             <div class="subscription-block">
                 <p>{{ subscription.length }} mois</p>
                 <p>{{ salePrice }} €</p>
                 <p>Au lieu de <span class="subscription-regular-price">{{ regularPrice }} €</span></p>
-                {% if saleAmount > 0 %}
-                    <p>-{{ saleAmount }} € </p>
-                {% endif %}
+
+                <form method="post" action="{{path('subscription_payment', {subscriptionAmount: price})}}">
+                    {% if saleAmount > 0 %}
+                        <p>-{{ saleAmount }} € </p>
+                    {% endif %}
+                    <input type="hidden" id="amount" value="{{ price }}">
+                    <input type="submit" value="Choisir">
+                </form>
 
             </div>
 
