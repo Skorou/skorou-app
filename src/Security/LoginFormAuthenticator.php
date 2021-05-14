@@ -93,11 +93,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         $user = $token->getUser();
 
-        if(!$user->isActive())
-        {
-            return new RedirectResponse($this->urlGenerator->generate('need_subscription'));
-         }
-
         if($user->isVerified())
         {
             return new RedirectResponse($this->urlGenerator->generate('dashboard'));
