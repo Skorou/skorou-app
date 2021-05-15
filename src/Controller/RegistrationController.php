@@ -240,6 +240,24 @@ class RegistrationController extends AbstractController
     {
         $subscriptions = $this->getSubscriptions();
 
+        if($request->isMethod('POST'))
+        {
+            $amount = $request->request->get('amount');
+
+//            $this->redirectToRoute(
+//                'subscription_payment',
+//                array('subscriptionAmount' => $amount),
+//                307
+//            );
+
+            $response = $this->forward(
+                'App\Controller\RegistrationController::subscriptionPayment', [
+                'subscriptionAmount'  => $amount,
+            ]);
+
+            return $response;
+        }
+
         return $this->render('registration/subscription.html.twig', [
             'controller_name' => 'RegistrationController',
             'subscriptions' => $subscriptions,
@@ -252,19 +270,15 @@ class RegistrationController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function subscriptionPayment(Request $request)
+    public function subscriptionPayment(Request $request, $subscriptionAmount)
     {
         // Set your secret key. Remember to switch to your live secret key in production.
         // See your keys here: https://dashboard.stripe.com/apikeys
         \Stripe\Stripe::setApiKey('sk_test_51IjOenKmSLmNLJ03EWVJGLjidQzNbNUQuCBcxSnoA8GHtU8NoNlpzAjrjC2ZrFc21vOYe4BWrrdPUycLSWdRTXx700NhERDdnv');
 
-        // Token is created using Stripe Checkout or Elements!
-        // Get the payment token ID submitted by the form:
-//        $token = $_POST['stripeToken'];
+//        $subscriptionAmount = $request->get('subscriptionAmount');
 
-        $subscriptionAmount = $request->get('subscriptionAmount');
-
-        if ($request->isMethod('post'))
+        if ($request->isMethod('POST'))
         {
             try
             {
