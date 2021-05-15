@@ -24,7 +24,7 @@
                 <p>{{ salePrice }} €</p>
                 <p>Au lieu de <span class="subscription-regular-price">{{ regularPrice }} €</span></p>
 
-                <form method="post" action="{{path('subscription_payment', {subscriptionAmount: price})}}">
+                <form method="post" action="{{ path('subscription_payment') }}">
                     {% if saleAmount > 0 %}
                         <p>-{{ saleAmount }} € </p>
                     {% endif %}
