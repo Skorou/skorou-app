@@ -1,7 +1,7 @@
 # MyDigitalStartup medical web project
 ## Installation guide
 ### Clone the repository
-Run command : `git clone https://github.com/gabrielley68/MyMedicalStartup.git`  
+Run command : `git clone https://github.com/Skorou/skorou-app.git`  
 Move to newly created directory `cd MyMedicalStartup`  
 
 ### Download dependencies
