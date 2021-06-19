@@ -32,7 +32,7 @@ abstract class OrderableController extends AbstractCrudController
         if (!$request->isXmlHttpRequest()){
             throw new HttpException(403, "Can't access this action directly");
         }
-        $data = json_decode($request->getContent());
+        w$data = json_decode($request->getContent());
         $newOrder = json_decode($data->order);
         if (!$newOrder) {
             throw new HttpException(400, "Missing order parameter");

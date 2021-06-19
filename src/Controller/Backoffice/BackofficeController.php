@@ -4,6 +4,7 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Creation;
 use App\Entity\CreationType;
+use App\Entity\Template;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -71,6 +72,7 @@ class BackofficeController extends AbstractDashboardController
 
             MenuItem::section('Templates'),
             MenuItem::linkToCrud('Types de catégorie', 'fa fa-tags', CreationType::class),
+            MenuItem::linkToCrud('Templates', 'fa fa-file', Template::class),
             MenuItem::linkToCrud('Créations', 'fa fa-file', Creation::class),
 
             MenuItem::section('Users'),
