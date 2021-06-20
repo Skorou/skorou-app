@@ -134,6 +134,9 @@
     "laravel/homestead": {
         "version": "v10.3.1"
     },
+    "monolog/monolog": {
+        "version": "2.2.0"
+    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -181,6 +184,9 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "stripe/stripe-php": {
+        "version": "v7.77.0"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
@@ -319,6 +325,24 @@
     },
     "symfony/mime": {
         "version": "v5.1.6"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v5.1.11"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.7",
+            "ref": "329f6a5ef2e7aa033f802be833ef8d1268dd0848"
+        },
+        "files": [
+            "./config/packages/dev/monolog.yaml",
+            "./config/packages/prod/deprecations.yaml",
+            "./config/packages/prod/monolog.yaml",
+            "./config/packages/test/monolog.yaml"
+        ]
     },
     "symfony/options-resolver": {
         "version": "v5.1.6"
@@ -465,6 +489,9 @@
     "symfony/uid": {
         "version": "v5.1.6"
     },
+    "symfony/ux-dropzone": {
+        "version": "v1.3.0"
+    },
     "symfony/validator": {
         "version": "4.3",
         "recipe": {
@@ -502,16 +529,19 @@
         ]
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.6",
+        "version": "1.9",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "1.6",
-            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+            "version": "1.9",
+            "ref": "9399a0bfc6ee7a0c019f952bca46d6a6045dd451"
         },
         "files": [
-            "./assets/css/app.css",
-            "./assets/js/app.js",
+            "./assets/app.js",
+            "./assets/bootstrap.js",
+            "./assets/controllers.json",
+            "./assets/controllers/hello_controller.js",
+            "./assets/styles/app.css",
             "./config/packages/assets.yaml",
             "./config/packages/prod/webpack_encore.yaml",
             "./config/packages/test/webpack_encore.yaml",

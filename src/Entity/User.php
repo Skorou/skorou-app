@@ -103,6 +103,56 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $faxNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $website;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $companyStatus;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $capital;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $apeCode;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $siret;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $siren;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -532,6 +582,126 @@ class User implements UserInterface, \Serializable
     public function isActive(): bool
     {
         return $this->isActive;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getFaxNumber(): ?string
+    {
+        return $this->faxNumber;
+    }
+
+    public function setFaxNumber(?string $faxNumber): self
+    {
+        $this->faxNumber = $faxNumber;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getCompanyStatus(): ?string
+    {
+        return $this->companyStatus;
+    }
+
+    public function setCompanyStatus(?string $companyStatus): self
+    {
+        $this->companyStatus = $companyStatus;
+
+        return $this;
+    }
+
+    public function getCapital(): ?int
+    {
+        return $this->capital;
+    }
+
+    public function setCapital(?int $capital): self
+    {
+        $this->capital = $capital;
+
+        return $this;
+    }
+
+    public function getApeCode(): ?string
+    {
+        return $this->apeCode;
+    }
+
+    public function setApeCode(?string $apeCode): self
+    {
+        $this->apeCode = $apeCode;
+
+        return $this;
+    }
+
+    public function getSiret(): ?string
+    {
+        return $this->siret;
+    }
+
+    public function setSiret(?string $siret): self
+    {
+        $this->siret = $siret;
+
+        return $this;
+    }
+
+    public function getSiren(): ?string
+    {
+        return $this->siren;
+    }
+
+    public function setSiren(?string $siren): self
+    {
+        $this->siren = $siren;
+
+        return $this;
     }
 
 }
