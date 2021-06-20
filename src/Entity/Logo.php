@@ -18,9 +18,9 @@ class Logo
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
      */
-    private $file;
+    private $brochureFilename;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,14 +37,14 @@ class Logo
         return $this->id;
     }
 
-    public function getFile(): ?string
+    public function getBrochureFilename()
     {
-        return $this->file;
+        return $this->brochureFilename;
     }
 
-    public function setFile(string $file): self
+    public function setBrochureFilename($brochureFilename)
     {
-        $this->file = $file;
+        $this->brochureFilename = $brochureFilename;
 
         return $this;
     }
