@@ -14,25 +14,25 @@ class Subscription
     public const SUBSCRIPTION = [
             [
                 'id'           => 'a87c6',
-                'duration'     => 30,
+                'duration'     => 1,
                 'regularPrice' => 20,
                 'salePrice'    => 0
             ],
             [
                 'id'           => 'c8e4s',
-                'duration'     => 90,
+                'duration'     => 3,
                 'regularPrice' => 60,
                 'salePrice'    => 55
             ],
             [
                 'id'           => 'f15w6',
-                'duration'     => 180,
+                'duration'     => 6,
                 'regularPrice' => 120,
                 'salePrice'    => 105
             ],
             [
                 'id'           => 'e56c4',
-                'duration'     => 365,
+                'duration'     => 12,
                 'regularPrice' => 240,
                 'salePrice'    => 200
             ],

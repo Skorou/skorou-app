@@ -90,7 +90,7 @@ class SubscriptionController extends AbstractController
                     $subscription->setUser($user);
                     $startDate = new \DateTime('@'.strtotime('now'));
                     $endDate = new \DateTime('@'.strtotime('now'));
-                    $endDate->add(new \DateInterval('P' . $subscriptionDuration . 'D'));
+                    $endDate->add(new \DateInterval('P' . $subscriptionDuration . 'M'));
                     $subscription->setStartDate($startDate);
                     $subscription->setEndDate($endDate);
                     $subscription->setPrice($subscriptionAmount);

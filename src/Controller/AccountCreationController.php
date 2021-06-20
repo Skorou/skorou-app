@@ -3,16 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Color;
 use App\Entity\Logo;
 use App\Form\AddressFormType;
-use App\Form\UploadType;
+use App\Form\CharterColorType;
+use App\Form\LogoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class AccountCreationController extends AbstractController
@@ -71,27 +75,89 @@ class AccountCreationController extends AbstractController
     /**
      * @Route("/register/account_creation/logo", name="logo_upload")
      */
-    public function uploadLogo(Request $request)
+    public function uploadLogo(Request $request,  SluggerInterface $slugger) : Response
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(UploadType::class);
+        $form = $this->createForm(LogoType::class);
 
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted() && $form->isValid())
-//        {
-//            $logo = new Logo();
-//            $data = $form->getData();
-//            $logo->setBrochureFilename($data['address1']);
-//            $logo->setUser($user);
-//
-//            $this->entityManager->persist($logo);
-//            $this->entityManager->flush();
-//        }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $logo = new Logo();
+
+            $logoFile = $form->get('fileName')->getData();
+
+            // this condition is needed because the 'logo' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($logoFile)
+            {
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $logoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try
+                {
+                    $logoFile->move(
+                        $this->getParameter('logo_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw $e;
+                }
+
+                // updates the 'logoFilename' property to store the image file name
+                // instead of its contents
+                $logo->setName($newFilename);
+                $logo->setUser($user);
+
+                $this->entityManager->persist($logo);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('color_choice');
+            }
+        }
 
         return $this->render('registration/account_creation/logo_upload.html.twig', [
             'controller_name' => 'AccountCreationController',
             'logoForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/register/account_creation/colors", name="color_choice")
+     */
+    public function chooseColor(Request $request) : Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(CharterColorType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $color1 = $form->get('color1')->getData();
+            $color2 = $form->get('color2')->getData();
+            $color3 = $form->get('color3')->getData();
+            $hexaColors = [];
+            array_push($hexaColors, $color1, $color2, $color3);
+
+            foreach($hexaColors as $hexaColor)
+            {
+                $color = new Color();
+
+                $color->setHexa($hexaColor);
+                $color->setUser($user);
+
+                $this->entityManager->persist($color);
+                $this->entityManager->flush();
+            }
+        }
+
+        return $this->render('registration/account_creation/color_choice.html.twig', [
+            'controller_name' => 'AccountCreationController',
+            'colorForm' => $form->createView()
         ]);
     }
 }
