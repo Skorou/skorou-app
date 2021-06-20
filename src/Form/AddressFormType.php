@@ -141,7 +141,7 @@ class AddressFormType extends AbstractType
                 )
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Continuer'
+                'label' => 'Suivant'
             ])
         ;
     }

@@ -18,11 +18,6 @@ class Logo
     private $id;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $brochureFilename;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -35,18 +30,6 @@ class Logo
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBrochureFilename()
-    {
-        return $this->brochureFilename;
-    }
-
-    public function setBrochureFilename($brochureFilename)
-    {
-        $this->brochureFilename = $brochureFilename;
-
-        return $this;
     }
 
     public function getName(): ?string

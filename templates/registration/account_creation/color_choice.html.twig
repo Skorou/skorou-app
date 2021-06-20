@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Importez votre logo{% endblock %}
+
+{% block body %}
+
+    <h1>Choisissez vos couleurs</h1>
+
+    <p>Ajoutez ici les couleurs de votre charte graphique.
+        Vous n’en n’avez pas ? Aucun problème cliquez sur l’icône « + »,
+        notre outil vous permettra de choisir des couleurs cohérentes.
+        Vous avez déjà des couleurs ? Entrez le code hexadécimal de celles-ci.
+        Si vous n’avez pas le code hexadécimal, rendez-vous sur notre blog pour
+        découvrir la marche à suivre.</p>
+
+    <p>Sélectionnez 3 couleurs :</p>
+
+{#    <button>Me proposer une palette de couleurs</button>#}
+
+    {{ form(colorForm) }}
+
+{% endblock %}
