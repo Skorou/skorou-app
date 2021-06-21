@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Entity\Color;
+use App\Entity\Font;
 use App\Entity\Logo;
 use App\Form\AddressFormType;
 use App\Form\CharterColorType;
+use App\Form\FontType;
 use App\Form\LogoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -75,7 +77,7 @@ class AccountCreationController extends AbstractController
     /**
      * @Route("/register/account_creation/logo", name="logo_upload")
      */
-    public function uploadLogo(Request $request,  SluggerInterface $slugger) : Response
+    public function uploadLogo(Request $request, SluggerInterface $slugger) : Response
     {
         $user = $this->getUser();
 
@@ -84,23 +86,23 @@ class AccountCreationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $logo = new Logo();
+            $font = new Font();
 
-            $logoFile = $form->get('fileName')->getData();
+            $fontFile = $form->get('fileName')->getData();
 
             // this condition is needed because the 'logo' field is not required
             // so the image file must be processed only when a file is uploaded
-            if ($logoFile)
+            if ($fontFile)
             {
-                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalFilename = pathinfo($fontFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $logoFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fontFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try
                 {
-                    $logoFile->move(
+                    $fontFile->move(
                         $this->getParameter('logo_directory'),
                         $newFilename
                     );
@@ -110,10 +112,10 @@ class AccountCreationController extends AbstractController
 
                 // updates the 'logoFilename' property to store the image file name
                 // instead of its contents
-                $logo->setName($newFilename);
-                $logo->setUser($user);
+                $font->setName($newFilename);
+                $font->setUser($user);
 
-                $this->entityManager->persist($logo);
+                $this->entityManager->persist($font);
                 $this->entityManager->flush();
 
                 return $this->redirectToRoute('color_choice');
@@ -153,11 +155,64 @@ class AccountCreationController extends AbstractController
                 $this->entityManager->persist($color);
                 $this->entityManager->flush();
             }
+
+            return $this->redirectToRoute('font_upload');
         }
 
         return $this->render('registration/account_creation/color_choice.html.twig', [
             'controller_name' => 'AccountCreationController',
             'colorForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/register/account_creation/fonts", name="font_upload")
+     */
+    public function uploadFont(Request $request, SluggerInterface $slugger) : Response
+    {
+        $form = $this->createForm(FontType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $font = new Font();
+
+            $fontFile = $form->get('fileName')->getData();
+            $fontName = $form->get('fontName')->getData();
+
+            // this condition is needed because the 'logo' field is not required
+            // so the image file must be processed only when a file is uploaded
+            if ($fontFile)
+            {
+                $originalFilename = pathinfo($fontFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fontFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try
+                {
+                    $fontFile->move(
+                        $this->getParameter('font_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw $e;
+                }
+
+                // updates the 'logoFilename' property to store the image file name
+                // instead of its contents
+                $font->setFile($newFilename);
+                $font->setName($fontName);
+
+                $this->entityManager->persist($font);
+                $this->entityManager->flush();
+            }
+        }
+
+        return $this->render('registration/account_creation/font_upload.html.twig', [
+            'controller_name' => 'AccountCreationController',
+            'fontForm' => $form->createView()
         ]);
     }
 }

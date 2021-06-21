@@ -7,7 +7,7 @@
     <h1>Choisissez vos couleurs</h1>
 
     <p>Ajoutez ici les couleurs de votre charte graphique.
-        Vous n’en n’avez pas ? Aucun problème cliquez sur l’icône « + »,
+        Vous n’en n’avez pas ? Aucun problème cliquez sur l’icône "+",
         notre outil vous permettra de choisir des couleurs cohérentes.
         Vous avez déjà des couleurs ? Entrez le code hexadécimal de celles-ci.
         Si vous n’avez pas le code hexadécimal, rendez-vous sur notre blog pour
@@ -15,8 +15,13 @@
 
     <p>Sélectionnez 3 couleurs :</p>
 
-{#    <button>Me proposer une palette de couleurs</button>#}
+    <button onclick="setRandomColors()">Me proposer une palette de couleurs</button>
 
     {{ form(colorForm) }}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="{{ asset('assets/js/color_scheme.js') }}" type="text/javascript"></script>
+    {% endblock %}
 
 {% endblock %}
