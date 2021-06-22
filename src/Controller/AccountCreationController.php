@@ -77,7 +77,7 @@ class AccountCreationController extends AbstractController
     /**
      * @Route("/register/account_creation/logo", name="logo_upload")
      */
-    public function uploadLogo(Request $request, SluggerInterface $slugger) : Response
+    public function uploadLogo(Request $request,  SluggerInterface $slugger) : Response
     {
         $user = $this->getUser();
 
@@ -86,23 +86,23 @@ class AccountCreationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $font = new Font();
+            $logo = new Logo();
 
-            $fontFile = $form->get('fileName')->getData();
+            $logoFile = $form->get('fileName')->getData();
 
             // this condition is needed because the 'logo' field is not required
             // so the image file must be processed only when a file is uploaded
-            if ($fontFile)
+            if ($logoFile)
             {
-                $originalFilename = pathinfo($fontFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fontFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $logoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try
                 {
-                    $fontFile->move(
+                    $logoFile->move(
                         $this->getParameter('logo_directory'),
                         $newFilename
                     );
@@ -112,10 +112,10 @@ class AccountCreationController extends AbstractController
 
                 // updates the 'logoFilename' property to store the image file name
                 // instead of its contents
-                $font->setName($newFilename);
-                $font->setUser($user);
+                $logo->setName($newFilename);
+                $logo->setUser($user);
 
-                $this->entityManager->persist($font);
+                $this->entityManager->persist($logo);
                 $this->entityManager->flush();
 
                 return $this->redirectToRoute('color_choice');

@@ -1,3 +1,12 @@
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
 async function getRandomColors()
 {
     var myHeaders = new Headers();
@@ -22,14 +31,15 @@ async function getRandomColors()
 
 async function setRandomColors()
 {
-    // const randomColors = await getRandomColors();
+    const randomColors = await getRandomColors();
 
     let colorInputs = document.getElementsByClassName("random-color");
 
     for(let i = 0 ; i < colorInputs.length ; i++)
     {
-        console.log(colorInputs[i]);
-        // TODO: convert array to hex color
-        // colorInputs[i].value = randomColors['result'][i];
+        colorInputs[i].value = rgbToHex(
+            randomColors.result[i][0],
+            randomColors.result[i][1],
+            randomColors.result[i][2]);
     }
 }
