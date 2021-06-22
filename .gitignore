@@ -4,6 +4,7 @@
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
+/public/uploads/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -17,13 +18,3 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
-
-public/uploads/font/tt-commons-regular-webfont-60d1064eb2e3f.
-
-public/uploads/font/tt-commons-regular-webfont-60d1077e58f06.
-
-public/uploads/font/tt-commons-regular-webfont-60d25b5021b77.
-
-public/uploads/logo/170px-RAID-1-svg-60d248848b9a0.png
-
-public/uploads/logo/170px-RAID-1-svg-60d249a4e4842.png
