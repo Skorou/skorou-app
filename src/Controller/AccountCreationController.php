@@ -95,16 +95,13 @@ class AccountCreationController extends AbstractController
             if ($logoFile)
             {
                 $originalFilename = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $logoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try
                 {
                     $logoFile->move(
                         $this->getParameter('logo_directory'),
-                        $newFilename
+                        $originalFilename
                     );
                 } catch (FileException $e) {
                     throw $e;
@@ -112,7 +109,7 @@ class AccountCreationController extends AbstractController
 
                 // updates the 'logoFilename' property to store the image file name
                 // instead of its contents
-                $logo->setName($newFilename);
+                $logo->setName($originalFilename);
                 $logo->setUser($user);
 
                 $this->entityManager->persist($logo);
@@ -185,16 +182,13 @@ class AccountCreationController extends AbstractController
             if ($fontFile)
             {
                 $originalFilename = pathinfo($fontFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fontFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try
                 {
                     $fontFile->move(
                         $this->getParameter('font_directory'),
-                        $newFilename
+                        $originalFilename
                     );
                 } catch (FileException $e) {
                     throw $e;
@@ -202,7 +196,7 @@ class AccountCreationController extends AbstractController
 
                 // updates the 'logoFilename' property to store the image file name
                 // instead of its contents
-                $font->setFile($newFilename);
+                $font->setFile($originalFilename);
                 $font->setName($fontName);
 
                 $this->entityManager->persist($font);
