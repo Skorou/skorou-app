@@ -1,41 +1,61 @@
-function componentToHex(c)
-{
+function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length === 1 ? "0" + hex : hex;
 }
 
-function rgbToHex(r, g, b)
-{
+function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-function getUnlockedColors()
+function hexToRgb(hex) {
+    hex = hex.substring(1);
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+
+    return [r, g, b];
+}
+
+function getModelInput()
 {
     let lockButtons = document.getElementsByClassName("lock-button");
-    let colorInputs = [];
+    let colorInputs = document.getElementsByClassName("random-color");
+    let inputArray  = [];
 
-    for(let i = 0 ; i < lockButtons.length ; i++)
+    for(let i = 0 ; i < colorInputs.length ; i++)
     {
-        if(lockButtons[i].getAttribute('data-color' + [i]) === 'unlocked')
+        // there are same number of lockButtons than colorInputs
+        // so colorButtons[i] = lockButtons[i]
+        if(lockButtons[i].getAttribute('data-color') === 'unlocked')
         {
-            colorInputs.push(document.querySelector(".random-color" + [i]));
+            inputArray.push('N');
+        }
+        else
+        {
+            console.log('je passe dans le N');
+            inputArray.push(hexToRgb(colorInputs[i].value));
         }
     }
 
-    return colorInputs;
+    return inputArray;
 }
 
 async function getRandomColors()
 {
-    var myHeaders = new Headers();
-    let unlockedColors = getUnlockedColors();
-    
+    var myHeaders  = new Headers();
+    let modelInput = getModelInput();
 
+    let model = {
+        'input': modelInput,
+        'model': 'default'
+    }
+    
     var myInit = { method: 'POST',
         headers: myHeaders,
         mode: 'cors',
         cache: 'default',
-        body: '{"model":"default"}'
+        body: JSON.stringify(model)
     };
 
     try {
@@ -51,16 +71,15 @@ async function getRandomColors()
 
 async function setRandomColors()
 {
-    let colorInputs = getUnlockedColors();
-
     const randomColors = await getRandomColors();
+    let colorInputs = document.getElementsByClassName("random-color");
 
     for(let i = 0 ; i < colorInputs.length ; i++)
     {
         colorInputs[i].value = rgbToHex(
-            randomColors.result[i][0],
-            randomColors.result[i][1],
-            randomColors.result[i][2]
+            randomColors.result[i][0], // R
+            randomColors.result[i][1], // G
+            randomColors.result[i][2] // B
         );
     }
 }
@@ -71,14 +90,15 @@ function lockColor()
 
     for(let i = 0 ; i < lockButtons.length ; i++)
     {
-        lockButtons[i].onclick = function() {
-            if (lockButtons[i].getAttribute('data-color' + [i]) === 'unlocked')
+        lockButtons[i].onclick = function()
+        {
+            if (lockButtons[i].getAttribute('data-color') === 'unlocked')
             {
-                lockButtons[i].setAttribute('data-color' + [i], 'locked');
+                lockButtons[i].setAttribute('data-color', 'locked');
             }
             else
             {
-                lockButtons[i].setAttribute('data-color' + [i], 'unlocked');
+                lockButtons[i].setAttribute('data-color', 'unlocked');
             }
         }
     }

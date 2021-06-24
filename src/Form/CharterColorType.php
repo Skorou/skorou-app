@@ -23,8 +23,8 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'attr' => [
-                    'class' => 'random-color0',
-                    'data-color0' => 'unlocked'
+                    'class' => 'random-color',
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('lock1', CheckboxType::class , [
@@ -33,7 +33,7 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'attr' => [
                     'class' => 'lock-button',
-                    'data-color0' => 'unlocked'
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('color2', ColorType::class , [
@@ -41,8 +41,8 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'attr' => [
-                    'class' => 'random-color1',
-                    'data-color1' => 'unlocked'
+                    'class' => 'random-color',
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('lock2', CheckboxType::class , [
@@ -51,7 +51,7 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'attr' => [
                     'class' => 'lock-button',
-                    'data-color1' => 'unlocked'
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('color3', ColorType::class , [
@@ -59,8 +59,8 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'attr' => [
-                    'class' => 'random-color2',
-                    'data-color2' => 'unlocked'
+                    'class' => 'random-color',
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('lock3', CheckboxType::class , [
@@ -69,7 +69,7 @@ class CharterColorType extends AbstractType
                 'mapped' => false,
                 'attr' => [
                     'class' => 'lock-button',
-                    'data-color2' => 'unlocked'
+                    'data-color' => 'unlocked'
                 ]
             ])
             ->add('save', SubmitType::class, [
