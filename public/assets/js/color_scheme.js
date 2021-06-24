@@ -50,7 +50,7 @@ async function getRandomColors()
         'input': modelInput,
         'model': 'default'
     }
-    
+
     var myInit = { method: 'POST',
         headers: myHeaders,
         mode: 'cors',

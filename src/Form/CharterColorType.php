@@ -31,6 +31,7 @@ class CharterColorType extends AbstractType
                 // unmapped means that this field is not associated to any entity property
                 'label' => 'Lock ?',
                 'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'lock-button',
                     'data-color' => 'unlocked'
@@ -49,6 +50,7 @@ class CharterColorType extends AbstractType
                 // unmapped means that this field is not associated to any entity property
                 'label' => 'Lock ?',
                 'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'lock-button',
                     'data-color' => 'unlocked'
@@ -67,6 +69,7 @@ class CharterColorType extends AbstractType
                 // unmapped means that this field is not associated to any entity property
                 'label' => 'Lock ?',
                 'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'lock-button',
                     'data-color' => 'unlocked'
