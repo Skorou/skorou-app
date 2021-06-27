@@ -1,20 +1,23 @@
 export default {
     props: {
         "type": String,
-        "initialConfig": Object,
+        "config": Object,
     },
-    data: function() {
-        return {
-            "config": this.initialConfig
-        };
-    },
-    method: {
+    methods: {
         handleTransform(e) {
-            this.config.x = e.target.x();
-            this.config.y = e.target.y();
-            this.config.rotation = e.target.rotation();
-            this.scaleX = e.target.scaleX();
-            this.scaleY = e.target.scaleY();
-        }
+            let newConfig = this.config;
+            newConfig.x = e.target.x();
+            newConfig.y = e.target.y();
+            newConfig.rotation = e.target.rotation();
+            newConfig.scaleX = e.target.scaleX();
+            newConfig.scaleY = e.target.scaleY();
+            this.$store.commit('updateConfig', newConfig)
+        },
+        handleDrag(e) {
+            let newConfig = this.config;
+            newConfig.x = e.target.x();
+            newConfig.y = e.target.y();
+            this.$store.commit('updateConfig', newConfig)
+        },
     },
 }

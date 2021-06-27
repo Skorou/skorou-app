@@ -1,8 +1,8 @@
 <template>
-  <KonvaRectangle v-if="type === 'rect'" :initial-config="config"></KonvaRectangle>
-  <KonvaCircle v-else-if="type === 'circle'" :initial-config="config"></KonvaCircle>
-  <KonvaText v-else-if="type === 'text'" :initial-config="config"></KonvaText>
-  <KonvaImage v-else-if="type === 'image'" :initial-config="config"></KonvaImage>
+  <KonvaRectangle v-if="type === 'rect'" :config="config"></KonvaRectangle>
+  <KonvaCircle v-else-if="type === 'circle'" :config="config"></KonvaCircle>
+  <KonvaText v-else-if="type === 'text'" :config="config"></KonvaText>
+  <KonvaImage v-else-if="type === 'image'" :config="config"></KonvaImage>
 </template>
 
 <script>

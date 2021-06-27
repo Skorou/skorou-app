@@ -1,5 +1,5 @@
 <template>
-  <v-circle :config="config"></v-circle>
+  <v-circle :config="config" @transformend="handleTransform" @dragend="handleDrag"></v-circle>
 </template>
 
 <script>

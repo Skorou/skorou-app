@@ -1,73 +1,74 @@
 <template>
-    <div>
-        <Canvas ref="canvas" :selectedElements="selectedElements" v-on:set-selected-element="selectedElements = $event"/>
-        <div id="toolbar">
-            <button @click="addElem('rect', {
-                width: 100,
-                height: 50,
-                fill: 'red',
-                stroke: 'black',
-                strokeWidth: 5,
-                draggable: true,
-                name: 'konvaElement',
-            })">Rectangle</button>
-            <button @click="addElem('circle', {
-                radius: 40,
-                fill: 'blue',
-                stroke: 'black',
-                strokeWidth: 5,
-                draggable: true,
-                name: 'konvaElement'
-            })">Cercle</button>
-            <br/>
-            <input v-model="textInput" placeholder="Enter text here"/>
-            <button @click="textInput && addElem('text', {
-                text: textInput,
-                fontSize: 30,
-                fontFamily: 'Comic sans MS',
-                draggable: true,
-                name: 'konvaElement'
-            })">Text</button>
-            <br/>
-            <button @click="loadImage({
-                height: 150,
-                width: 150,
-                draggable: true,
-                name: 'konvaElement'
-            })">Image</button>
+    <div id="editor">
+      <div id="controls">
+        <div id="controls-tab">
+          <div :class="[{active: currentTab === 'text'}, 'controls-tab']" @click="currentTab = 'text'">
+            <div class="controls-tab-title">Texte</div>
+          </div>
+          <div :class="[{active: currentTab === 'photos'}, 'controls-tab']" @click="currentTab = 'photos'">
+            <div class="controls-tab-title">Photos</div>
+          </div>
+          <div :class="[{active: currentTab === 'shapes'}, 'controls-tab']" @click="currentTab = 'shapes'">
+            <div class="controls-tab-title">Éléments</div>
+          </div>
         </div>
+        <div id="controls-panel">
+          <Controls :panel="currentTab"/>
+        </div>
+      </div>
+      <div id="canvas-container">
+        <div id="canvas-tools">
+          <Toolbar/>
+        </div>
+        <div id="canvas">
+          <Canvas/>
+        </div>
+      </div>
+      <div id="save-btn">
+        <button class="btn btn-lg btn-success" @click="save">
+          Sauvegarder
+        </button>
+      </div>
     </div>
 </template>
 
 <script>
-    import Canvas from "./Canvas";
+import Canvas from "./Canvas";
+import Controls from "./Controls";
+import Toolbar from "./Toolbar";
 
-    export default {
-        name: "Editor",
-        components: { Canvas },
-        data() {
-          return {
-            elements: [],
-            textInput: '',
-            selectedElements: [],
-          }
-        },
-        methods: {
-          addElem: function(type, config){
-            this.$refs.canvas.addElement(type, config)
-          },
-          loadImage: function (config) {
-            let image = new Image();
-            image.onload = function(){
-                this.addElem('image', {
-                    ...config,
-                    image
-                });
-            }.bind(this);
-            image.src = "/assets/images/logo_skorou.jpg";
-          },
-        }
+export default {
+  name: "Editor",
+  components: {Toolbar, Controls, Canvas },
+  data() {
+    return {
+      currentTab: 'text',
     }
+  },
+  methods: {
+    save(){
+      const url = window['SAVE_URL'];
+      const data = JSON.stringify(this.$store.state.elements);
+        fetch(url, {
+            headers: new Headers({
+                "X-Requested-With": "XMLHttpRequest"  // Follow common headers
+            }),
+            method: 'POST',
+            body: JSON.stringify({
+                'data': data,
+            })
+        }).then(function(response){
+            if(response.ok) {
+              alert("Template sauvegardé");
+            } else {
+                console.error("error")
+            }
+        }).catch(function(error){
+            console.error(error)
+        });
+    }
+  }
+}
 </script>
 
 <style scoped>

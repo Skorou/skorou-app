@@ -26,6 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin-orderable-index', './assets/js/utils/admin-orderable.js')
     .addEntry('template-editor', './assets/js/TemplateEditor/template-editor.js')
+    .addEntry('template-renderer', './assets/js/TemplateRenderer/template-renderer.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

@@ -1,5 +1,5 @@
 <template>
-  <v-rect :config="config"></v-rect>
+  <v-rect :config="config" @transformend="handleTransform" @dragend="handleDrag"></v-rect>
 </template>
 
 <script>

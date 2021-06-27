@@ -1,5 +1,5 @@
 <template>
-  <v-text :config="config"></v-text>
+  <v-text :config="config" @transformend="handleTransform" @dragend="handleDrag"></v-text>
 </template>
 
 <script>

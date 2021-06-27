@@ -26,22 +26,18 @@
     export default {
       name: "Canvas",
       components: {Element},
-      props: {
-        'selectedElements': Array,
-      },
       data() {
         return {
-            configKonva: {
-                width: 500,
-                height: 500,
-            },
-            elements: [],
-            selectorCoords: {
-              x1: null,
-              x2: null,
-              y1: null,
-              y2: null
-            }
+          configKonva: {
+              width: 800,
+              height: 800,
+          },
+          selectorCoords: {
+            x1: null,
+            x2: null,
+            y1: null,
+            y2: null
+          },
         }
       },
       created() {
@@ -50,9 +46,18 @@
       destroyed() {
         window.removeEventListener('keydown', this.handleKeyboard);
       },
+      computed: {
+        elements() {
+          return this.$store.state.elements;
+        },
+        selectedDomElements() {
+          return this.$store.state.selectedElements.map((elem) => this.$refs.mainLayer.getNode().findOne(`#${elem.id}`));
+        }
+      },
       methods: {
-        addElement(type, config){
-          this.elements.push({type, config})
+        setSelectedElements(selectedElements) {
+          this.$store.commit('setSelectedElements', selectedElements.map((domElem) => domElem.attrs.id));
+          this.updateTransformer(selectedElements);
         },
         updateTransformer(selectedElements) {
           const transformerNode = this.$refs.transformer.getNode();
@@ -71,8 +76,7 @@
           }
           // Click on stage - clear selection
           if (e.target === e.target.getStage()) {
-            this.$emit('set-selected-element', []);
-            this.updateTransformer([]);
+            this.setSelectedElements([]);
             return;
           }
 
@@ -83,12 +87,11 @@
           if (!metaPressed) {
             newSelection = [e.target];
           } else if (metaPressed && isSelected){
-            newSelection = this.selectedElements.filter(item => item !== e.target);
+            newSelection = this.selectedDomElements.filter(item => item !== e.target);
           } else if(metaPressed && !isSelected) {
-            newSelection = this.selectedElements.concat([e.target]);
+            newSelection = this.selectedDomElements.concat([e.target]);
           }
-
-          this.$emit('set-selected-element', newSelection);
+          this.setSelectedElements(newSelection);
           this.updateTransformer(newSelection);
         },
         handleStageMouseDown(e) {
@@ -145,12 +148,11 @@
           const shapes = e.target.getStage().find('.konvaElement').toArray();
           const box = selectorNode.getClientRect();
           const selectedShapes = shapes.filter(shape => Konva.Util.haveIntersection(box, shape.getClientRect()));
-
-          this.$emit('set-selected-element', selectedShapes);
+          this.setSelectedElements(selectedShapes);
           this.updateTransformer(selectedShapes);
         },
         handleKeyboard(e) {
-          if(this.selectedElements.length) {
+          if(this.selectedDomElements.length) {
             let callback;
             const DELTA = e.ctrlKey ? 8 : 2;
             switch(e.key) {
@@ -170,7 +172,7 @@
                 return
             }
             e.preventDefault();
-            this.selectedElements.map(callback);
+            this.setSelectedElements(this.selectedDomElements.map(callback));
             this.$refs.mainLayer.getNode().batchDraw();
           }
         },
@@ -185,7 +187,7 @@
               return;
             }
 
-            if(this.selectedElements.indexOf(guideItem) !== -1) {
+            if(this.selectedDomElements.indexOf(guideItem) !== -1) {
               return;
             }
 
@@ -330,7 +332,7 @@
         handleDragMove(e) {
           const layer = e.target.getLayer();
 
-          if(this.selectedElements.length && e.target.getType() !== "Group"){
+          if(this.selectedDomElements.length && e.target.getType() !== "Group"){
             return
           }
 
