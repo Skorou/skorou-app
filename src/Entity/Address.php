@@ -20,7 +20,7 @@ class Address
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address1;
 
@@ -30,29 +30,19 @@ class Address
     private $address2;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $zipcode;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $country;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $first_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $last_name;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="addresses")
@@ -60,7 +50,7 @@ class Address
     private $user;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $is_favorite;
 

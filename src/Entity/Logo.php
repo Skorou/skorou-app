@@ -20,11 +20,6 @@ class Logo
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $file;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $name;
 
     /**
@@ -35,18 +30,6 @@ class Logo
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFile(): ?string
-    {
-        return $this->file;
-    }
-
-    public function setFile(string $file): self
-    {
-        $this->file = $file;
-
-        return $this;
     }
 
     public function getName(): ?string

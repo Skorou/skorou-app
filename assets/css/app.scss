@@ -1,27 +1,75 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 
+/* app fonts */
+
+@font-face {
+    font-family: "Antipasto";
+    src: url("../../public/assets/fonts/antipasto/Antipasto-Pro-Regular.ttf") format("truetype"),
+    url("../../public/assets/fonts/antipasto/Antipasto-Pro-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Antipasto Bold";
+    src: url("../../public/assets/fonts/antipasto/Antipasto-Pro-Bold.ttf") format("truetype"),
+    url("../../public/assets/fonts/antipasto/Antipasto-Pro-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Segoe UI";
+    src: url("../../public/assets/fonts/segoe_ui/Segoe-UI.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Segoe UI Bold";
+    src: url("../../public/assets/fonts/segoe_ui/Segoe-UI-Bold.ttf") format("truetype");
+}
+
 /* app colors */
 
-$primary-color-1: yellow;
-$primary-color-2: green;
-$primary-color-3: blue;
+$primary-color-1: #E84712;
+$primary-color-2: #258D8A;
+$primary-color-3: #FBBA00;
+$primary-color-4: #393B40;
+$primary-color-5: #000000;
+$primary-color-5: #ffffff;
 $text-color: #121212;
+
+/* global */
+a.full-width-button
+{
+    display: block;
+    width: 100%;
+    border-radius: 50px;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+a.full-width-button:hover
+{
+    text-decoration: none;
+}
 
 /* titles and text */
 h1
 {
-  color: $primary-color-1;
+    color: $primary-color-1;
+    font-family: 'Antipasto', sans-serif;
 }
 
 h2
 {
-  color: $primary-color-2;
+    color: $primary-color-2;
+    font-family: 'Antipasto', sans-serif;
 }
 
 .content-text
 {
-  color: $text-color;
+    color: $text-color;
 }
 
 .center-text
@@ -38,8 +86,38 @@ i.bi
 
 body
 {
-    background-color: lightgray;
     margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+input[type=text],
+input[type=email],
+input[type=password]
+{
+    border-radius: 60px;
+    border-width: 0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    padding: 20px;
+}
+
+input::placeholder
+{
+    color: #A4A4A4 !important;
+    font-size: 18px;
+}
+
+.arrow
+{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.arrow > img
+{
+    width: 30px;
 }
 
 /* navbar */
@@ -75,4 +153,190 @@ body
 .alert
 {
     z-index: 10;
+}
+
+/* Welcome Page */
+.login-register-container,
+.login-container,
+.register-container
+{
+    height: auto;
+    padding: 80px;
+    background-color: white;
+    border-radius: 58px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-register-container
+{
+    width: 500px;
+}
+
+.login-container,
+.register-container
+{
+    width: 600px;
+}
+
+.login-register-container > h1 > img
+{
+    width: 150px;
+    margin-bottom: 100px;
+}
+
+.login-register-container > .sign-up-button
+{
+    background-color: $primary-color-3;
+    margin-bottom: 50px;
+}
+
+.login-register-container > .sign-up-button:hover
+{
+    background-color: $primary-color-3;
+}
+
+.login-register-container > .sign-in-button
+{
+    background-color: $primary-color-2;
+}
+
+.login-register-container > .sign-in-button:hover
+{
+    background-color: $primary-color-2;
+}
+
+.frame
+{
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    z-index: -10;
+}
+
+.gray-rectangle-background
+{
+    width: auto;
+    height: 92vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.orange-top-elem
+{
+    position: absolute;
+    top: -50px;
+    left: -170px;
+    width: 400px;
+}
+
+.green-bottom-elem
+{
+    position: absolute;
+    bottom: -150px;
+    left: -170px;
+    width: 300px;
+}
+
+.yellow-bottom-elem
+{
+    position: absolute;
+    bottom: 100px;
+    right: -220px;
+    width: 400px;
+}
+
+/* Login */
+.login-container > form > input
+{
+    margin-bottom: 50px;
+}
+
+.login-container > form > h1
+{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 50px !important;
+}
+
+.skorou-logo-top-elem
+{
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 300px;
+}
+
+.gray-rectangle-background-alt
+{
+    width: auto;
+    height: 92vh;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.green-bottom-elem-alt
+{
+    position: absolute;
+    bottom: -70px;
+    left: -120px;
+    width: 300px;
+}
+
+.login-container > form > button[type=submit]
+{
+    display: block;
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-3;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+    float: right;
+}
+
+.login-container > form > .sign-up-button
+{
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* Subcription */
+.subscription-container
+{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.subscription-block
+{
+    width: 20%;
+    height: auto;
+    padding: 100px;
+    background-color: white;
+    border-radius: 79px;
+}
+
+.subscription-regular-price
+{
+    text-decoration: line-through;
+}
+
+/* Subscription payment */
+#card-element > .__PrivateStripeElement > .__PrivateStripeElement-input
+{
+    position: relative !important;
 }

@@ -10,6 +10,33 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription
 {
+
+    public const SUBSCRIPTION = [
+            [
+                'id'           => 'a87c6',
+                'duration'     => 1,
+                'regularPrice' => 20,
+                'salePrice'    => 0
+            ],
+            [
+                'id'           => 'c8e4s',
+                'duration'     => 3,
+                'regularPrice' => 60,
+                'salePrice'    => 55
+            ],
+            [
+                'id'           => 'f15w6',
+                'duration'     => 6,
+                'regularPrice' => 120,
+                'salePrice'    => 105
+            ],
+            [
+                'id'           => 'e56c4',
+                'duration'     => 12,
+                'regularPrice' => 240,
+                'salePrice'    => 200
+            ],
+        ];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -28,7 +55,7 @@ class Subscription
     private $end_date;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     private $payment_type;
 
@@ -38,26 +65,15 @@ class Subscription
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $invoice;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="subscriptions")
-     * TODO: add address when implemented nullable false
-     */
-    private $address;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CreditCard::class, inversedBy="subscriptions")
-     */
-    private $credit_card;
 
     public static $PAYMENT_TYPE = array("manual"=>0);
 
@@ -126,18 +142,6 @@ class Subscription
         return $this;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -146,18 +150,6 @@ class Subscription
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreditCard(): ?CreditCard
-    {
-        return $this->credit_card;
-    }
-
-    public function setCreditCard(?CreditCard $credit_card): self
-    {
-        $this->credit_card = $credit_card;
 
         return $this;
     }

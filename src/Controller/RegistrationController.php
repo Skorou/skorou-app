@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Subscription;
 use App\Entity\User;
+use App\Form\AddressFormType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
@@ -59,7 +61,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setIsActive(true);
+            $user->setIsActive(false);
             $user->setFreeCreations(3);
 
             $this->entityManager->persist($user);
@@ -106,7 +108,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/register/verify/email", name="app_verify_email")
      */
     public function verifyUserEmail(Request $request): Response
     {
@@ -131,11 +133,11 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('welcome_user');
     }
 
     /**
-     * @Route("/wait_verify_email", name="wait_verify_email")
+     * @Route("/register/wait_verify_email", name="wait_verify_email")
      */
     public function waitVerifyEmail()
     {
@@ -145,9 +147,23 @@ class RegistrationController extends AbstractController
         {
             $this->addFlash('success', 'Your email address has been verified.');
 
-            return $this->redirectToRoute('dashboard');
+            return $this->redirectToRoute('welcome_user');
         }
 
         return $this->render('registration/verify_email.html.twig');
+    }
+
+    /**
+     * @Route("/register/welcome", name="welcome_user")
+     */
+    public function welcomeUser()
+    {
+        $user = $this->getUser();
+
+        return $this->render('registration/welcome.html.twig', [
+            'controller_name' => 'RegistrationController',
+            'user' => $user,
+            'title' => 'Welcome'
+        ]);
     }
 }

@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    logo_directory: '%kernel.project_dir%/public/assets/uploads/logo'
+    font_directory: '%kernel.project_dir%/public/assets/uploads/font'
 
 services:
     # default configuration for services in *this* file
@@ -22,9 +24,20 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+        autowire: true
 
     App\Controller\Backoffice\:
         resource: '../src/Controller/Backoffice'
+
+    App\Controller\SubscriptionController:
+        autowire: true
+        tags: [ 'controller.service_arguments' ]
+
+    App\Service\FacebookService:
+        arguments:
+            $fbAppId: '%env(FB_APP_ID)%'
+            $fbAppSecret: '%env(FB_APP_SECRET)%'
+            $fbGraphVersion: '%env(FB_GRAPH_VERSION)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {%  block background %}
+        <img src="{{ asset('assets/images/gray_rectangle_background.svg') }}" class="gray-rectangle-background-alt" alt="gray rectangle"/>
+        <img src="{{ asset('assets/images/skorou_logo_top_elem.svg') }}" class="skorou-logo-top-elem" alt="gray rectangle"/>
+        <img src="{{ asset('assets/images/yellow_bottom_elem.svg') }}" class="yellow-bottom-elem" alt="yellow graphic element"/>
+        <img src="{{ asset('assets/images/green_bottom_elem_alt.svg') }}" class="green-bottom-elem-alt" alt="green graphic element"/>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block javascripts %}{% endblock %}
+{% endblock %}
