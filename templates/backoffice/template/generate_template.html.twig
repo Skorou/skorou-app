@@ -1,0 +1,29 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block page_title %}Éditer un template{% endblock %}
+
+{% block content_title %}Éditer le template {{ obj.name }}{% endblock %}
+
+{% set save_url = ea_url()
+        .setController('App\\Controller\\Backoffice\\TemplateController')
+        .setAction('saveTemplate') %}
+
+{% block body_javascript %}
+  {{ parent() }}
+
+{% endblock %}
+
+
+{% block content %}
+    <script>
+        window['SAVE_URL'] = "{{ save_url }}".replaceAll('&amp;', '&');
+        window['INITIAL_CONFIG'] = {{ data|raw }}
+    </script>
+    {% verbatim %}
+    <div id="template-editor">
+      <Editor/>
+    </div>
+    {% endverbatim %}
+    {{ encore_entry_script_tags('template-editor') }}
+{% endblock %}
+

@@ -171,4 +171,9 @@ class CreationType
     {
         return "{$this->getWidth()} x {$this->getHeight()}";
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

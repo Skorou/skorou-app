@@ -19,6 +19,18 @@ abstract class OrderableController extends AbstractCrudController
         return 'order_index';
     }
 
+    public function createEntity(string $entityFqcn)
+    {
+
+        $newEntity = parent::createEntity($entityFqcn);
+        $maxOrderIndex = $this->getDoctrine()->getRepository($entityFqcn)
+            ->createQueryBuilder('e')
+            ->select('MAX(e.order_index)')
+            ->getQuery()->getSingleResult()[1];
+        $newEntity->{$this::getOrderableFieldSetter()}(is_null($maxOrderIndex) ? 0 : $maxOrderIndex);
+        return $newEntity;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
