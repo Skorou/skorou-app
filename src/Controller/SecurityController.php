@@ -69,6 +69,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/index", name="entry_point")
+     * @Route("/")
      */
     public function welcomePage()
     {

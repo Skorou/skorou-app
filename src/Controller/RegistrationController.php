@@ -91,7 +91,7 @@ class RegistrationController extends AbstractController
             }
             catch (TransportExceptionInterface $e)
             {
-                throw new Exception("Sending mail failed");
+                throw new Exception("Sending mail failed : " . $e->getMessage());
             }
 
             return $guardHandler->authenticateUserAndHandleSuccess(
