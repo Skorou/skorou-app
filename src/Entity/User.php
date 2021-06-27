@@ -153,6 +153,13 @@ class User implements UserInterface, \Serializable
      */
     private $siren;
 
+    /**
+     * token for forgotten password
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $resetToken;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -702,6 +709,22 @@ class User implements UserInterface, \Serializable
         $this->siren = $siren;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResetToken(): string
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken(?string $resetToken): void
+    {
+        $this->resetToken = $resetToken;
     }
 
 }

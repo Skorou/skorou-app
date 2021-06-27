@@ -1,11 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
 
-    <h1>S'inscrire</h1>
+    {% block content %}
+        <div class="register-container">
+            <h1>S'inscrire</h1>
 
-    {{ form(registrationForm) }}
+            {{ form(registrationForm) }}
+        </div>
+    {% endblock %}
 
 {% endblock %}

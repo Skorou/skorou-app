@@ -1,11 +1,11 @@
-<h1>Welcome {{ email.toName }}!</h1>
+<h1>Bienvenue {{ email.toName }}!</h1>
 
 <p>
-    You signed up as {{ username }} the following email:
+    Vous vous êtes inscrit(e) en tant que {{ username }} avec l'adresse e-mail suivante :
 </p>
 <p><code>{{ email.to[0].address }}</code></p>
 
 <p>
-    <a href="{{ signedUrl|raw }}">Click here to activate your account</a>
-    (this link is valid until {{ expiration_date|date('F jS') }})
+    <a href="{{ signedUrl|raw }}">Cliquez ici pour activer votre compte</a>
+    (ce lien est valide jusqu'au {{ expiration_date|date('d/m/Y') }})
 </p>
