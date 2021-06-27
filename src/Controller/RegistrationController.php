@@ -166,35 +166,4 @@ class RegistrationController extends AbstractController
             'title' => 'Welcome'
         ]);
     }
-
-    /**
-     * @Route("/register/address", name="address")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function address(Request $request)
-    {
-////        $user = $this->getUser();
-//        //TODO: what ? une adresse est forcément liée à une souscription ??
-//        $address = new Address($subscriptions);
-//
-//        $form = $this->createForm(AddressFormType::class, $address);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid())
-//        {
-////            $user->setIsActive(false);
-////            $user->setFreeCreations(3);
-////
-////            $this->entityManager->persist($user);
-////            $this->entityManager->flush();
-//
-//            return $this->redirectToRoute('subscriptions');
-//        }
-//
-//        return $this->render('registration/address.html.twig', [
-//            'addressForm' => $form->createView(),
-//            'controller_name' => 'RegistrationController',
-//        ]);
-    }
 }

@@ -18,7 +18,7 @@ class DashboardController extends AbstractController
     {
         $user = $this->getUser();
 
-        if(!$user->isActive())
+        if($user && !$user->getIsActive())
         {
             return $this->redirectToRoute('need_subscription');
         }

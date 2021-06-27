@@ -94,6 +94,7 @@ class SubscriptionController extends AbstractController
                     $subscription->setStartDate($startDate);
                     $subscription->setEndDate($endDate);
                     $subscription->setPrice($subscriptionAmount);
+                    $user->setIsActive(true);
 
                     //TODO: set user address in subscription
 //                    $subscription->setAddress();

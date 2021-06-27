@@ -201,12 +201,26 @@ class AccountCreationController extends AbstractController
 
                 $this->entityManager->persist($font);
                 $this->entityManager->flush();
+
             }
+
+            return $this->redirectToRoute('social_networks_connect');
+
         }
 
         return $this->render('registration/account_creation/font_upload.html.twig', [
             'controller_name' => 'AccountCreationController',
             'fontForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/register/account_creation/social_networks_connect", name="social_networks_connect")
+     */
+    public function loginWithSocialNetworks(Request $request) : Response
+    {
+        return $this->render('registration/account_creation/social_networks_connect.html.twig', [
+            'controller_name' => 'AccountCreationController'
         ]);
     }
 }
