@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter aux réseaux{% endblock %}
+
+{% block body %}
+
+    <h1>Connectez-vous</h1>
+
+    <div class="fb-login-button"
+         data-size="large"
+         data-button-type="login_with"
+         data-layout="rounded"
+         data-auto-logout-link="true"
+         data-use-continue-as="false"
+         data-scope="public_profile,email"
+         onlogin="fbGetLoginStatus();"
+         data-width=""></div>
+
+    <a href="{{ path('dashboard') }}">Terminer</a>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        <script src="{{ asset('assets/js/facebook_login.js') }}" type="text/javascript"></script>
+        <script async defer crossorigin="anonymous"
+                src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0&appId=506962090622258">
+        </script>
+    {% endblock %}
+
+{% endblock %}

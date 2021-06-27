@@ -1,14 +1,38 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 
+/* app fonts */
+
+@font-face {
+    font-family: "Antipasto";
+    src: url("../../public/assets/fonts/antipasto/Antipasto-Pro-Regular.ttf") format("truetype"),
+    url("../../public/assets/fonts/antipasto/Antipasto-Pro-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Antipasto Bold";
+    src: url("../../public/assets/fonts/antipasto/Antipasto-Pro-Bold.ttf") format("truetype"),
+    url("../../public/assets/fonts/antipasto/Antipasto-Pro-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Segoe UI";
+    src: url("../../public/assets/fonts/segoe_ui/Segoe-UI.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Segoe UI Bold";
+    src: url("../../public/assets/fonts/segoe_ui/Segoe-UI-Bold.ttf") format("truetype");
+}
+
 /* app colors */
 
-$primary-color-1: rgba(138, 182, 237, 1);
-$primary-color-1-transparent: rgba(138, 182, 237, 0.7);
-$primary-color-2: rgba(232, 37, 208, 1);
-$primary-color-2-transparent: rgba(232, 37, 208, 0.7);
-$primary-color-3: rgba(98, 46, 219, 1);
-$primary-color-3-transparent: rgba(98, 46, 219, 0.7);
+$primary-color-1: #E84712;
+$primary-color-2: #258D8A;
+$primary-color-3: #FBBA00;
+$primary-color-4: #393B40;
+$primary-color-5: #000000;
+$primary-color-5: #ffffff;
 $text-color: #121212;
 
 /* global */
@@ -120,7 +144,7 @@ body
 
 .login-register-container > .sign-up-button:hover
 {
-    background-color: $primary-color-2-transparent;
+    background-color: $primary-color-2;
 }
 
 .login-register-container > .sign-in-button
@@ -130,7 +154,7 @@ body
 
 .login-register-container > .sign-in-button:hover
 {
-    background-color: $primary-color-3-transparent;
+    background-color: $primary-color-3;
 }
 
 /* Subcription */

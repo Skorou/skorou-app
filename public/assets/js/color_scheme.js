@@ -33,7 +33,6 @@ function getModelInput()
         }
         else
         {
-            console.log('je passe dans le N');
             inputArray.push(hexToRgb(colorInputs[i].value));
         }
     }
@@ -58,13 +57,14 @@ async function getRandomColors()
         body: JSON.stringify(model)
     };
 
-    try {
+    try
+    {
         const response = await fetch('http://colormind.io/api/', myInit);
 
         return response.json();
 
     } catch (error) {
-        alert(error);
+        console.log(error);
     }
 
 }
