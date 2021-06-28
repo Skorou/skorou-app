@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Entity\Template;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DashboardController extends AbstractController
 {
+
     /**
      * @Route("/dashboard", name="dashboard")
      * @Route("/")
@@ -25,6 +27,26 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
             'user' => $user,
             'title' => 'Dashboard'
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/creations", name="generate_creation")
+     */
+    public function generateCreations()
+    {
+        $templates = $this->getDoctrine()
+            ->getRepository(Template::class)
+            ->findAll();
+        $user = $this->getUser();
+        $mergedTemplates = array_map(function($template) use ($user) {
+            return $template->mergeFields($user);
+        }, $templates);
+
+        return $this->render('frontoffice/dashboard/creations.html.twig', [
+            'templates' => $mergedTemplates,
+            'user' => $user,
+            'title' => 'Génération de créations'
         ]);
     }
 }

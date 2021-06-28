@@ -22,6 +22,8 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin-orderable-index', './assets/js/utils/admin-orderable.js')
+    .addEntry('template-editor', './assets/js/TemplateEditor/template-editor.js')
+    .addEntry('template-renderer', './assets/js/TemplateRenderer/template-renderer.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

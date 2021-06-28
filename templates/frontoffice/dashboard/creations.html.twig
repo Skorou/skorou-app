@@ -1,0 +1,27 @@
+{% extends 'frontoffice/frontoffice_base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    {% block content %}
+        <div style="display: flex; flex-flow: row wrap">
+        {% for template in templates %}
+            <div data-konva-elements="{{ template.data|raw|json_encode() }}" class="creation-preview" style="background-color: white; border: 1px solid black; margin: 20px">
+                {% verbatim %}
+                    <v-stage
+                        :config="configKonva"
+                    >
+                      <v-layer>
+                        <template v-for="element in elements">
+                          <konva-element :config="element.config" :type="element.type"></konva-element>
+                        </template>
+                      </v-layer>
+                    </v-stage>
+                {% endverbatim %}
+            </div>
+        {% endfor %}
+        {{ encore_entry_script_tags('template-renderer') }}
+    {% endblock %}
+
+{% endblock %}

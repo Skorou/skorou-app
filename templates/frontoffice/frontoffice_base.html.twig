@@ -20,6 +20,7 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('backoffice') }}">Backoffice</a></li>
                 {% endif %}
+                <li><a href="{{ path('generate_creation') }}">Générer une création</a></li>
                 <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
             </ul>
         </nav>

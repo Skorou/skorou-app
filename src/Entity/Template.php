@@ -134,4 +134,24 @@ class Template
 
         return $this;
     }
+
+    public function mergeFields(User $user): self
+    {
+        $MERGE_FIELDS = [
+            "nom_entreprise" => function($user){
+                return $user->getUsername();
+            }
+        ];
+        $jsonEncodedData = json_encode($this->getData());
+        $jsonEncodedData = preg_replace_callback(
+            '/\[\#\ (.*?)\ \#\]/',
+            function($matches) use ($user, $MERGE_FIELDS) {
+                return $MERGE_FIELDS[$matches[1]]($user);
+            },
+            $jsonEncodedData
+        );
+        $this->setData(json_decode($jsonEncodedData));
+
+        return $this;
+    }
 }
