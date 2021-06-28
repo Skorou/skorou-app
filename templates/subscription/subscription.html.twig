@@ -1,37 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
 
-    <h1>Choix de l'abonnement</h1>
+    {% block content %}
 
-    <div class="subscription-container">
-        {% for subscription in subscriptions %}
+        <div class="register-container subscription">
+            <h1 class="big-title">Choix de l'abonnement</h1>
 
-            {% set regularPrice = subscription.regularPrice|trim %}
-            {% set salePrice = subscription.salePrice|trim %}
-            {% set saleAmount = regularPrice - salePrice %}
-            {% set subscriptionId = subscription.id %}
+            <div class="subscription-container">
+                {% for subscription in subscriptions %}
 
-            {% if salePrice == 0 %}
-                {% set salePrice = regularPrice %}
-            {% endif %}
+                    {% set regularPrice = subscription.regularPrice|trim %}
+                    {% set salePrice = subscription.salePrice|trim %}
+                    {% set subscriptionId = subscription.id %}
 
-            <div class="subscription-block">
-                <p>{{ subscription.duration }} mois</p>
-                <p>{{ salePrice }} €</p>
-                <p>Au lieu de <span class="subscription-regular-price">{{ regularPrice }} €</span></p>
+                    {% if salePrice == 0 %}
+                        {% set salePrice = regularPrice %}
+                    {% endif %}
 
-                <form method="post" action="{{ path('subscription_payment', {subscriptionId: subscriptionId})}}">
-                    <p>-{{ saleAmount }} € </p>
-                    <input type="hidden" id="subscriptionId" value="{{ subscriptionId }}">
-                    <input type="submit" value="Choisir">
-                </form>
+                    <div class="subscription-block">
+                        <p class="subscription-duration">{{ subscription.duration }} mois</p>
 
+                        <div>
+                            <p class="subscription-price">{{ salePrice }} €</p>
+
+                            {% if salePrice != regularPrice %}
+                                <p class="sale">Au lieu de <span class="subscription-regular-price">{{ regularPrice }} €</span></p>
+                            {% endif %}
+
+                            <form method="post" action="{{ path('subscription_payment', {subscriptionId: subscriptionId})}}">
+                                <input type="hidden" id="subscriptionId" value="{{ subscriptionId }}">
+                                <input type="submit" class="yellow-button" value="Choisir">
+                            </form>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
             </div>
 
-        {% endfor %}
-    </div>
+        </div>
+    {% endblock %}
 
 {% endblock %}

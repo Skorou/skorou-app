@@ -32,7 +32,7 @@ $primary-color-2: #258D8A;
 $primary-color-3: #FBBA00;
 $primary-color-4: #393B40;
 $primary-color-5: #000000;
-$primary-color-5: #ffffff;
+$primary-color-6: #ffffff;
 $text-color: #121212;
 
 /* global */
@@ -57,13 +57,13 @@ a.full-width-button:hover
 /* titles and text */
 h1
 {
-    color: $primary-color-1;
+    color: $primary-color-2;
     font-family: 'Antipasto', sans-serif;
 }
 
 h2
 {
-    color: $primary-color-2;
+    color: $primary-color-1;
     font-family: 'Antipasto', sans-serif;
 }
 
@@ -120,6 +120,86 @@ input::placeholder
     width: 30px;
 }
 
+.yellow-button
+{
+    display: block;
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-3;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+.green-button
+{
+    display: block;
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-2;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+.orange-button
+{
+    display: block;
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-1;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+.orange-button:hover,
+.yellow-button:hover,
+.green-button:hover
+{
+    text-decoration: none;
+    color: $primary-color-6;
+}
+
+.yellow-subtitle
+{
+    text-transform: uppercase;
+    color: $primary-color-3;
+    text-align: center;
+}
+
+.orange-subtitle
+{
+    text-transform: uppercase;
+    color: $primary-color-1;
+    text-align: center;
+}
+
+.green-subtitle
+{
+    text-transform: uppercase;
+    color: $primary-color-2;
+    text-align: center;
+}
+
+.big-title
+{
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 60px;
+    text-transform: uppercase;
+    color: $primary-color-5;
+    white-space: nowrap;
+}
+
 /* navbar */
 
 .menu-button
@@ -131,22 +211,100 @@ input::placeholder
 
 .side-navbar
 {
-    display: flex;
-    flex-direction: column;
     background-color: white;
     height: 100%;
+    width: 300px;
     padding: 50px;
     position: absolute;
     top: 0;
     left: 0;
     transform: translateX(-100%);
     transition: all ease-out .3s;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-company-logo
+{
+    width: 150px;
+    height: auto;
+}
+
+.menu-container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.menu-container > ul
+{
+    width: 100%;
+    padding: 0;
+}
+
+.menu-container > ul > li
+{
+    list-style: none;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.menu-container > ul > li:not(:last-child)
+{
+    border-bottom: 1px solid lightgray;
+}
+
+.menu-container > ul > li > a
+{
+    text-decoration: none;
+    color: $text-color;
 }
 
 .navbar-logo
 {
-    width: 150px;
-    height: auto;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 100px;
+}
+
+.nav-green-element
+{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: -100px;
+}
+
+.side-navbar .company-name
+{
+    font-size: 25px;
+    color: $primary-color-3;
+    margin-top: 30px;
+}
+
+.navbar-bottom-buttons > .logout-button
+{
+    border-radius: 50px;
+    border: 2px solid $primary-color-6;
+    background-color: transparent;
+    color: $primary-color-6;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+    position: absolute;
+    bottom: 80px;
+    text-decoration: none;
+}
+
+.navbar-bottom-buttons > .logout-button:hover
+{
+
+    background-color: $primary-color-6;
+    color: $primary-color-5;
 }
 
 /* alerts */
@@ -290,7 +448,8 @@ input::placeholder
     width: 300px;
 }
 
-.login-container > form > button[type=submit]
+.login-container > form > button[type=submit],
+.register-container > form button[type=submit]
 {
     display: block;
     border-radius: 50px;
@@ -313,7 +472,110 @@ input::placeholder
     margin-top: 30px;
 }
 
-/* Subcription */
+.login-container > form > .forgotten-password
+{
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    color: #888888;
+    margin-bottom: 20px;
+}
+
+.login-container > form > .sign-up-button
+{
+    color: $primary-color-1;
+}
+
+/* Registration */
+.register-container .form-check
+{
+    margin: 40px 0;
+    text-align: right;
+    color: $primary-color-1;
+}
+
+.register-container .form-control
+{
+    margin-bottom: 40px;
+}
+
+/* Verify email */
+.register-container.verify-email .subtitle
+{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.register-container.verify-email .validate-email
+{
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-2;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+.register-container.verify-email .validate-email:hover
+{
+    text-decoration: none;
+    color: white;
+}
+
+.register-container.verify-email .button-container-right
+{
+    text-align: right;
+    margin-top: 50px;
+}
+
+/* Welcome user after registration */
+.register-container.welcome-user .button-container-right
+{
+    text-align: right;
+    margin-top: 40px;
+}
+
+.register-container.welcome-user .button-container-right > a
+{
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-3;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+}
+
+.register-container.welcome-user .button-container-right > a:hover
+{
+    text-decoration: none;
+    color: white;
+}
+
+.register-container.welcome-user .text-container
+{
+    text-align: center;
+}
+
+.register-container.welcome-user
+{
+    width: 700px;
+}
+
+.register-container.welcome-user h2
+{
+    margin-bottom: 40px;
+}
+
+/* Subscription */
+.register-container.subscription
+{
+    width: 80%;
+}
+
 .subscription-container
 {
     display: flex;
@@ -323,20 +585,273 @@ input::placeholder
 
 .subscription-block
 {
-    width: 20%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-block > div
+{
     height: auto;
-    padding: 100px;
+    padding: 50px;
     background-color: white;
     border-radius: 79px;
 }
 
-.subscription-regular-price
+.subscription-block .subscription-price
+{
+    font-size: 100px;
+    text-align: center;
+}
+
+.subscription-block .sale
+{
+    color: $primary-color-1;
+    font-size: 25px;
+    text-align: center;
+}
+
+.subscription-block .sale .subscription-regular-price
 {
     text-decoration: line-through;
+}
+
+.subscription-duration
+{
+    width: 100%;
+    background-color: $primary-color-2;
+    color: $primary-color-6;
+    text-align: center;
+    padding: 10px;
+    font-size: 25px;
+}
+
+.subscription-block .sale .subscription-regular-price
+{
+    text-decoration: line-through;
+}
+
+.subscription-block .yellow-button
+{
+    width: 100%;
+}
+
+.register-container.subscription > .big-title
+{
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Subscription payment */
 #card-element > .__PrivateStripeElement > .__PrivateStripeElement-input
 {
     position: relative !important;
+}
+
+#payment-form > button
+{
+    display: block;
+    border-radius: 50px;
+    border-width: 0;
+    background-color: $primary-color-3;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    font-size: 20px;
+    float: right;
+    margin-top: 50px;
+}
+
+/* Account configuration */
+.register-container.user-info,
+.register-container.logo-upload,
+.register-container.color-choice,
+.register-container.font-upload,
+.register-container.social-container
+{
+    width: 90%;
+}
+
+.register-container.user-info .form-control
+{
+    margin-bottom: 20px;
+}
+
+.register-container.user-info .big-title
+{
+    margin-bottom: 50px;
+}
+
+.register-container.user-info .text-form
+{
+    text-transform: uppercase;
+    color: $primary-color-2;
+    font-family: 'Segoe UI Bold', sans-serif;
+    font-size: 20px;
+}
+
+.register-container.user-info .align-right
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+}
+
+.register-container.user-info .orange-button
+{
+    padding: 15px 30px;
+    line-height: 20px;
+    margin-right: 50px;
+}
+
+/* Logo upload */
+.register-container.logo-upload .skr-dropzone-container
+{
+    margin: 50px auto;
+    width: 50%;
+}
+
+.green-explanation
+{
+    color: $primary-color-2;
+}
+
+.register-container.logo-upload .skr-dropzone-container .green-explanation
+{
+    margin-bottom: 50px;
+}
+
+/* Color choice */
+.register-container.color-choice input[type=color]
+{
+    border-radius: 100%;
+    height: 60px;
+    width: 60px;
+    border: 1px solid lightgray;
+    outline: none;
+    -webkit-appearance: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.register-container.color-choice input[type=color]::-webkit-color-swatch-wrapper
+{
+    padding: 0;
+}
+.register-container.color-choice input[type=color]::-webkit-color-swatch
+{
+    border: none;
+    border-radius: 100%;
+}
+
+.register-container.color-choice form > #charter_color,
+.register-container.color-choice form > #charter_color > div
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.register-container.color-choice form > #charter_color > div > .form-group:first-child
+{
+    margin-right: 30px;
+}
+
+.register-container.color-choice .explanation-block
+{
+    width: 50%;
+    margin: 50px auto;
+}
+
+.register-container.color-choice .explanation-block button
+{
+    margin: 0 auto;
+}
+
+/* Font upload */
+.register-container.font-upload .skr-dropzone-container
+{
+    margin: 50px auto;
+    width: 50%;
+}
+
+.green-explanation
+{
+    color: $primary-color-2;
+}
+
+.register-container.font-upload .skr-dropzone-container .green-explanation
+{
+    margin-bottom: 50px;
+}
+
+/* Social network */
+.social-logo
+{
+    width: 80px;
+}
+
+.register-container.social-container .social-block
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.register-container.social-container .social-block > img
+{
+    margin-bottom: 50px;
+}
+
+.register-container.social-container .yellow-button
+{
+    float: right;
+}
+
+.register-container.social-container .yellow-button:hover
+{
+    text-decoration: none;
+    color: white;
+}
+
+/* Registration end */
+.login-register-container.registration-end > h1 > img
+{
+    margin-bottom: 50px;
+}
+
+.login-register-container.registration-end > p
+{
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+/* Media queries */
+@media screen and (max-width: 1790px)
+{
+    .subscription-block .subscription-price
+    {
+        font-size: 50px;
+    }
+
+    .subscription-block > div
+    {
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 1200px)
+{
+    .register-container.subscription
+    {
+        width: 90%;
+    }
+
+    .big-title
+    {
+        font-size: 50px;
+    }
 }

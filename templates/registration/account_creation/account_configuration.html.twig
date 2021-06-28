@@ -1,11 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Configurez votre compte{% endblock %}
 
 {% block body %}
 
-    <h1>Configurez votre compte</h1>
+    {% block content %}
+        <div class="register-container user-info">
+            <h1 class="big-title">Configurez votre compte</h1>
 
-    {{ form(addressForm) }}
+            {{ form_start(addressForm) }}
+                <div class="row">
+                    <div class="col">
+                        <p class="text-form">Merci de compléter les informations de votre entreprise :</p>
+                        {{ form_row(addressForm.address1) }}
+                        {{ form_row(addressForm.address2) }}
+                        <div class="row">
+                            <div class="col">{{ form_row(addressForm.zipcode) }}</div>
+                            <div class="col">{{ form_row(addressForm.city) }}</div>
+                        </div>
+                        {{ form_row(addressForm.country) }}
+                        {{ form_row(addressForm.phoneNumber) }}
+                        {{ form_row(addressForm.faxNumber) }}
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">{{ form_row(addressForm.firstname) }}</div>
+                            <div class="col">{{ form_row(addressForm.lastname) }}</div>
+                        </div>
+                        {{ form_row(addressForm.website) }}
+                        {{ form_row(addressForm.companyStatus) }}
+                        {{ form_row(addressForm.capital) }}
+                        {{ form_row(addressForm.apeCode) }}
+                        {{ form_row(addressForm.siret) }}
+                        {{ form_row(addressForm.siren) }}
+                    </div>
+                </div>
+
+                <div class="align-right">
+                    <a href="{{ path('dashboard') }}" class="orange-button">Quitter la configuration</a>
+                    {{ form_row(addressForm.save) }}
+                </div>
+            {{ form_end(addressForm) }}
+
+        </div>
+    {% endblock %}
 
 {% endblock %}

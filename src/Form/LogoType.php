@@ -24,6 +24,9 @@ class LogoType extends AbstractType
                 // every time you edit the Product details
                 'required' => false,
 
+                'label' => 'Fichier .png, .jpg, .jpeg ou .svg',
+
+
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [

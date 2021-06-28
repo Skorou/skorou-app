@@ -8,8 +8,20 @@
 
 {% block body %}
 
-    <h1>Bienvenue {{ user.username }}</h1>
-    <p>Merci d'avoir choisi Skorou</p>
-    <a href="{{ path('subscriptions') }}">C'est parti !</a>
+    {% block content %}
+        <div class="register-container welcome-user">
+            <img src="{{ asset('assets/images/welcome_registration_frame.svg') }}" class="frame" alt="colorful frame"/>
+
+            <h2 class="orange-subtitle">{{ user.username }}, merci d'avoir choisir Skorou !</h2>
+            <div class="text-container">
+                <p>Vous souhaitez créer des supports de communication pour votre entreprise simplement et rapidement ?</p>
+                <p>Chez Skorou, nous vous aidons à développer votre image de marque et votre notoriété grâce aux supports digitaux et imprimables.</p>
+            </div>
+
+            <div class="button-container-right">
+                <a href="{{ path('subscriptions') }}">C'est parti !</a>
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock %}

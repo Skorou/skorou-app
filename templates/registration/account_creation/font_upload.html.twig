@@ -1,11 +1,28 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Importez votre typographie{% endblock %}
 
 {% block body %}
 
-    <h1>Importez votre typographie</h1>
+    {% block content %}
+        <div class="register-container font-upload">
+            <h1 class="big-title">Importez votre typographie</h1>
 
-    {{ form(fontForm) }}
+            {{ form_start(fontForm) }}
+            <div class="skr-dropzone-container">
+                <p class="green-explanation">Dans votre charte graphique, vous avez déjà une police d’écriture spécifique ?
+                    Téléchargez-la en cliquant sur le bloc ci-dessous.
+                    Vous n’avez pas de police d’écriture ?
+                    Terminez cette étape et la police Skorou sera appliquée à tous vos supports.  </p>
+
+                {{ form_row(fontForm.fileName) }}
+                {{ form_row(fontForm.fontName) }}
+            </div>
+            {{ form_row(fontForm.save) }}
+
+            {{ form_end(fontForm) }}
+
+        </div>
+    {% endblock %}
 
 {% endblock %}

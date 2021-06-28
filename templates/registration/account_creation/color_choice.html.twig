@@ -1,27 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Choisissez vos couleurs{% endblock %}
 
 {% block body %}
 
-    <h1>Choisissez vos couleurs</h1>
+    {% block content %}
+        <div class="register-container color-choice">
+            <h1 class="big-title">Choisissez vos couleurs</h1>
 
-    <p>Ajoutez ici les couleurs de votre charte graphique.
-        Vous n’en n’avez pas ? Aucun problème cliquez sur l’icône "+",
-        notre outil vous permettra de choisir des couleurs cohérentes.
-        Vous avez déjà des couleurs ? Entrez le code hexadécimal de celles-ci.
-        Si vous n’avez pas le code hexadécimal, rendez-vous sur notre blog pour
-        découvrir la marche à suivre.</p>
+            <div class="center-text explanation-block">
+                <p class="green-explanation">Ajoutez ici les couleurs de votre charte graphique.
+                    Vous n’en n’avez pas ? Aucun problème cliquez sur le bouton ci-dessous,
+                    notre outil vous permettra de choisir des couleurs cohérentes.
+                    Vous avez déjà des couleurs ? Entrez le code hexadécimal de celles-ci.
+                    Si vous n’avez pas le code hexadécimal, rendez-vous sur notre blog pour
+                    découvrir la marche à suivre.</p>
 
-    <p>Sélectionnez 3 couleurs :</p>
+                <button onclick="setRandomColors()" class="green-button">Me proposer une palette de couleurs</button>
+            </div>
 
-    <button onclick="setRandomColors()">Me proposer une palette de couleurs</button>
+            {{ form_start(colorForm) }}
+                <div id="charter_color">
+                    <div>
+                        {{ form_row(colorForm.color1) }}
+                        {{ form_row(colorForm.lock1) }}
+                    </div>
 
-    {{ form(colorForm) }}
+                    <div>
+                        {{ form_row(colorForm.color2) }}
+                        {{ form_row(colorForm.lock2) }}
+                    </div>
 
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-        <script src="{{ asset('assets/js/color_scheme.js') }}" type="text/javascript"></script>
+                    <div>
+                        {{ form_row(colorForm.color3) }}
+                        {{ form_row(colorForm.lock3) }}
+                    </div>
+                </div>
+
+                {{ form_row(colorForm.save) }}
+
+            {{ form_end(colorForm) }}
+
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+                <script src="{{ asset('assets/js/color_scheme.js') }}" type="text/javascript"></script>
+            {% endblock %}
+
+        </div>
     {% endblock %}
 
 {% endblock %}

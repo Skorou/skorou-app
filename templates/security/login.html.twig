@@ -1,6 +1,6 @@
 {% extends 'login_base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 
@@ -29,7 +29,7 @@
                        value="{{ csrf_token('authenticate') }}"
                 >
 
-                <a class="forgottenPassword" href="{{ path('app_forgotten_password') }}">Mot de passe oublié</a>
+                <a class="forgotten-password" href="{{ path('app_forgotten_password') }}">Mot de passe oublié ?</a>
 
                 <button class="" type="submit">
                     Se connecter

@@ -1,22 +1,31 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Se connecter aux réseaux{% endblock %}
 
 {% block body %}
 
-    <h1>Connectez-vous</h1>
+    {% block content %}
+        <div class="register-container social-container">
+            <h1 class="big-title">Associez vos réseaux sociaux</h1>
 
-    <div class="fb-login-button"
-         data-size="large"
-         data-button-type="login_with"
-         data-layout="rounded"
-         data-auto-logout-link="true"
-         data-use-continue-as="false"
-         data-scope="public_profile,email"
-         onlogin="fbGetLoginStatus();"
-         data-width=""></div>
+            <div class="social-block">
+                <img src="{{ asset('assets/images/icons/facebook_icon.svg') }}" alt="facebook icon" class="social-logo"/>
 
-    <a href="{{ path('dashboard') }}">Terminer</a>
+                <div class="fb-login-button"
+                     data-size="large"
+                     data-button-type="login_with"
+                     data-layout="rounded"
+                     data-auto-logout-link="true"
+                     data-use-continue-as="false"
+                     data-scope="public_profile,email"
+                     onlogin="fbGetLoginStatus();"
+                     data-width=""></div>
+            </div>
+
+            <a href="{{ path('registration_end') }}" class="yellow-button">Terminer</a>
+
+        </div>
+    {% endblock %}
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}

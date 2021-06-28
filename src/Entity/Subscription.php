@@ -10,28 +10,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription
 {
-
+    // TODO: turn into associative array
     public const SUBSCRIPTION = [
             [
-                'id'           => 'a87c6',
+                'id'           => '1',
                 'duration'     => 1,
                 'regularPrice' => 20,
                 'salePrice'    => 0
             ],
             [
-                'id'           => 'c8e4s',
+                'id'           => '2',
                 'duration'     => 3,
                 'regularPrice' => 60,
                 'salePrice'    => 55
             ],
             [
-                'id'           => 'f15w6',
+                'id'           => '3',
                 'duration'     => 6,
                 'regularPrice' => 120,
                 'salePrice'    => 105
             ],
             [
-                'id'           => 'e56c4',
+                'id'           => '4',
                 'duration'     => 12,
                 'regularPrice' => 240,
                 'salePrice'    => 200

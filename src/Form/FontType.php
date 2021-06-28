@@ -26,6 +26,8 @@ class FontType extends AbstractType
                 // every time you edit the Product details
                 'required' => false,
 
+                'label' => 'Fichier .ttf, .otf, .woff ou .woff2',
+
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
@@ -36,7 +38,10 @@ class FontType extends AbstractType
                 ],
             ])
             ->add('fontName', TextType::class , [
-                'label' => 'Nom de votre typographie'
+                'label'    => false,
+                'attr' => [
+                    'placeholder' => 'Nom de votre typographie'
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Suivant'

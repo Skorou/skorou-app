@@ -131,7 +131,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre adresse e-mail a bien été vérifiée.');
 
         return $this->redirectToRoute('welcome_user');
     }
@@ -145,7 +145,7 @@ class RegistrationController extends AbstractController
 
         if($user->isVerified())
         {
-            $this->addFlash('success', 'Your email address has been verified.');
+            $this->addFlash('success', 'Votre adresse e-mail a bien été vérifiée.');
 
             return $this->redirectToRoute('welcome_user');
         }
@@ -163,7 +163,7 @@ class RegistrationController extends AbstractController
         return $this->render('registration/welcome.html.twig', [
             'controller_name' => 'RegistrationController',
             'user' => $user,
-            'title' => 'Welcome'
+            'title' => 'Bienvenue'
         ]);
     }
 }

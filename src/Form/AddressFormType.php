@@ -49,7 +49,7 @@ class AddressFormType extends AbstractType
                     'placeholder' => 'Complément d\'adresse (étage, apt...)'
                 )
             ])
-            ->add('zipcode', IntegerType::class, [
+            ->add('zipcode', TextType::class, [
                 'required' => false,
                 'label'    => false,
                 'attr' => array(
@@ -70,14 +70,14 @@ class AddressFormType extends AbstractType
                     'placeholder' => 'Pays'
                 )
             ])
-            ->add('phoneNumber', IntegerType::class, [
+            ->add('phoneNumber', TextType::class, [
                 'required' => false,
                 'label'    => false,
                 'attr'     => array(
                     'placeholder' => 'Numéro de téléphone'
                 )
             ])
-            ->add('faxNumber', IntegerType::class, [
+            ->add('faxNumber', TextType::class, [
                 'required' => false,
                 'label'    => false,
                 'attr' => array(
@@ -141,7 +141,7 @@ class AddressFormType extends AbstractType
                 )
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Suivant'
+                'label' => 'Continuer'
             ])
         ;
     }

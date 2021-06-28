@@ -223,4 +223,14 @@ class AccountCreationController extends AbstractController
             'controller_name' => 'AccountCreationController'
         ]);
     }
+
+    /**
+     * @Route("/register/account_creation/end", name="registration_end")
+     */
+    public function finishRegistration(Request $request) : Response
+    {
+        return $this->render('registration/account_creation/registration_end.html.twig', [
+            'controller_name' => 'AccountCreationController'
+        ]);
+    }
 }

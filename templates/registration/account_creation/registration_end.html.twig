@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !{% endblock %}
+
+{% block body %}
+
+    <img src="{{ asset('assets/images/gray_rectangle_background.svg') }}" class="gray-rectangle-background" alt="gray rectangle"/>
+    <img src="{{ asset('assets/images/orange_top_elem.svg') }}" class="orange-top-elem" alt="orange graphic element"/>
+    <img src="{{ asset('assets/images/green_bottom_elem.svg') }}" class="green-bottom-elem" alt="green graphic element"/>
+    <img src="{{ asset('assets/images/yellow_bottom_elem.svg') }}" class="yellow-bottom-elem" alt="yellow graphic element"/>
+
+    <div class="login-register-container registration-end">
+        <img src="{{ asset('assets/images/finish_frame.svg') }}" class="frame" alt="colorful frame"/>
+        <h1 class="center-text"><img src="{{ asset('assets/images/logo_skorou.svg') }}" alt="logo Skorou"/></h1>
+        <p class="center-text">Toute l’équipe de Skorou vous remercie d’avoir configurer votre compte. Vous êtes prêt ?</p>
+        <a href="{{ path('dashboard') }}" class="full-width-button sign-in-button">Commencer à créer</a>
+    </div>
+
+{% endblock %}

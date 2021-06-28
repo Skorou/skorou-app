@@ -1,12 +1,21 @@
 {% extends 'login_base.html.twig' %}
 
-{% block title %}Check your emails!{% endblock %}
+{% block title %}Vérifiez vos e-mails !{% endblock %}
 
 {% block body %}
 
-    <h1>Confirmation</h1>
-    <p>Plus qu'1 étape !</p>
-    <p>Vous allez recevoir un mail contenant un lien.</p>
-    <p>Merci de cliquer sur ce lien pour confirmer votre inscription.</p>
+    {% block content %}
+        <div class="register-container verify-email">
+            <img src="{{ asset('assets/images/confirmation_frame.svg') }}" class="frame" alt="colorful frame"/>
+
+            <h2 class="yellow-subtitle">Plus qu'une étape !</h2>
+            <p>Vous allez recevoir un mail contenant un lien.</p>
+            <p>Merci de cliquer sur ce lien pour confirmer votre inscription.</p>
+
+            <div class="button-container-right">
+                <a href="{{ path('wait_verify_email') }}" class="validate-email">Valider</a>
+            </div>
+        </div>
+    {% endblock %}
 
 {% endblock %}

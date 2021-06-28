@@ -1,11 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'login_base.html.twig' %}
 
 {% block title %}Importez votre logo{% endblock %}
 
 {% block body %}
 
-    <h1>Importez votre logo</h1>
+    {% block content %}
+        <div class="register-container logo-upload">
+            <h1 class="big-title">Importez votre logo</h1>
 
-    {{ form(logoForm) }}
+            {{ form_start(logoForm) }}
+                <div class="skr-dropzone-container">
+                    <p class="green-explanation">Si vous ne pouvez pas ajouter votre logo pour le moment, pas de panique !
+                        Vous aurez la possibilité de l’ajouter ultérieurement dans la rubrique "mon compte".
+                        Vous avez déjà un logo ? Pour le télécharger, cliquez sur le bloc "Téléchargez votre logo".
+                        Il est préférable d’avoir un logo en .png avec un fond transparent. </p>
+
+                        {{ form_row(logoForm.fileName) }}
+                </div>
+                {{ form_row(logoForm.save) }}
+
+            {{ form_end(logoForm) }}
+
+        </div>
+    {% endblock %}
 
 {% endblock %}

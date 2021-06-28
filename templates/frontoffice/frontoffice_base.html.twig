@@ -12,17 +12,27 @@
                 <i class="bi bi-x"></i>
             </button>
 
-            <img src="{{ asset('assets/uploads/logo/' ~ user.logos[0].name) }}" alt="company logo" class="navbar-logo"/>
-            <p>{{ app.user.username }}</p>
-            <ul>
-                <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
-                <li><a href="{{ path('contact') }}">Contact</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('backoffice') }}">Backoffice</a></li>
+            <img src="{{ asset('assets/images/logo_menu.svg') }}" alt="Skorou logo" class="navbar-logo"/>
+
+            <div class="menu-container">
+                {% if user.logos[0] is defined %}
+                    <img src="{{ asset('assets/uploads/logo/' ~ user.logos[0].name) }}" alt="company logo" class="navbar-company-logo"/>
                 {% endif %}
-                <li><a href="{{ path('generate_creation') }}">Générer une création</a></li>
-                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
-            </ul>
+                <p class="company-name">{{ app.user.username }}</p>
+                <ul>
+                    <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('backoffice') }}">Backoffice</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <img src="{{ asset('assets/images/nav_green_element.png') }}" alt="green graphic element" class="nav-green-element"/>
+
+            <div class="navbar-bottom-buttons">
+                <a href="{{ path('app_logout') }}" class="logout-button">Se déconnecter</a>
+            </div>
         </nav>
     {% endblock %}
 

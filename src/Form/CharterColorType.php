@@ -21,6 +21,7 @@ class CharterColorType extends AbstractType
             ->add('color1', ColorType::class , [
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
+                'label' => 'Couleur 1',
                 'required' => true,
                 'attr' => [
                     'class' => 'random-color',
@@ -29,7 +30,7 @@ class CharterColorType extends AbstractType
             ])
             ->add('lock1', CheckboxType::class , [
                 // unmapped means that this field is not associated to any entity property
-                'label' => 'Lock ?',
+                'label' => 'Vérouiller ?',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
@@ -40,6 +41,7 @@ class CharterColorType extends AbstractType
             ->add('color2', ColorType::class , [
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
+                'label' => 'Couleur 2',
                 'required' => true,
                 'attr' => [
                     'class' => 'random-color',
@@ -48,7 +50,7 @@ class CharterColorType extends AbstractType
             ])
             ->add('lock2', CheckboxType::class , [
                 // unmapped means that this field is not associated to any entity property
-                'label' => 'Lock ?',
+                'label' => 'Vérouiller ?',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
@@ -59,6 +61,7 @@ class CharterColorType extends AbstractType
             ->add('color3', ColorType::class , [
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
+                'label' => 'Couleur 3',
                 'required' => true,
                 'attr' => [
                     'class' => 'random-color',
@@ -67,7 +70,7 @@ class CharterColorType extends AbstractType
             ])
             ->add('lock3', CheckboxType::class , [
                 // unmapped means that this field is not associated to any entity property
-                'label' => 'Lock ?',
+                'label' => 'Vérouiller ?',
                 'mapped' => false,
                 'required' => false,
                 'attr' => [

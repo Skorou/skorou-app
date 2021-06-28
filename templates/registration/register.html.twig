@@ -1,12 +1,13 @@
 {% extends 'login_base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
 
     {% block content %}
         <div class="register-container">
-            <h1>S'inscrire</h1>
+            <img src="{{ asset('assets/images/registration_frame.svg') }}" class="frame" alt="colorful frame"/>
+            <a href="{{ path('entry_point') }}" class="arrow"><img src="{{ asset('assets/images/icons/arrow_left.svg') }}" alt="back arrow"/></a>
 
             {{ form(registrationForm) }}
         </div>
