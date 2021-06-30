@@ -26,7 +26,6 @@ class LogoType extends AbstractType
 
                 'label' => 'Fichier .png, .jpg, .jpeg ou .svg',
 
-
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
